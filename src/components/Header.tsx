@@ -35,7 +35,7 @@ export function Header() {
   };
   const activeTab = getActiveTab();
   return <header className="sticky top-0 z-50 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 border-b border-gray-200 shadow-lg">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 bg-slate-100">
         <div className="flex items-center justify-between h-16 bg-slate-100">
           {/* Logo */}
           <div className="flex-shrink-0">

@@ -63,7 +63,7 @@ const products = [{
   image: 'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=400&h=500&fit=crop'
 }];
 export function FeaturedProducts() {
-  return <section className="py-20 bg-gradient-to-b from-orange-50 to-yellow-50 bg-gray-50">
+  return <section className="py-20 bg-gradient-to-b from-gray-50 to-black-50 bg-gray-50">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center space-y-4 mb-16">
