@@ -30,7 +30,7 @@ export function Hero() {
               Explore Products
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Button>
-            <Button variant="outline" size="lg" className="border-white text-white hover:text-black bg-slate-400 hover:bg-slate-300">
+            <Button variant="outline" size="lg" className="border-white bg-green-600 hover:bg-green-500 text-slate-950">
               <Shield className="mr-2 h-5 w-5" />
               NADRA Verification
             </Button>
