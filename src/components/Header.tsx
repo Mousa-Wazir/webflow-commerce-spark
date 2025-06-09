@@ -11,7 +11,7 @@ export function Header() {
   const navItems = [
     { name: 'Home', href: '/' },
     { name: 'Products', href: '/products' },
-    { name: 'About Us', href: '#' },
+    { name: 'About Us', href: '/about' },
     { name: 'Contact Us', href: '#' },
   ];
 
@@ -39,7 +39,7 @@ export function Header() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <button onClick={() => navigate('/')} className="text-2xl font-bold text-orange-600">
+            <button onClick={() => navigate('/')} className="text-2xl font-bold text-black">
               LocalRent
             </button>
           </div>
@@ -50,9 +50,9 @@ export function Header() {
               <button
                 key={item.name}
                 onClick={() => handleTabClick(item.name, item.href)}
-                className={`px-6 py-2 text-sm font-medium rounded-lg transition-all duration-300 hover:bg-orange-50 hover:text-orange-600 hover:shadow-md ${
+                className={`px-6 py-2 text-sm font-medium rounded-lg transition-all duration-300 hover:bg-gray-100 hover:text-black hover:shadow-md ${
                   activeTab === item.name
-                    ? 'bg-orange-100 text-orange-600 shadow-md border-b-2 border-orange-500'
+                    ? 'bg-black text-white shadow-md'
                     : 'text-gray-700'
                 }`}
               >
@@ -64,18 +64,28 @@ export function Header() {
           {/* Right Icons */}
           <div className="flex items-center space-x-3">
             {/* NADRA Verification - Prominent */}
-            <Button variant="outline" size="sm" className="hidden md:flex border-green-500 text-green-600 hover:bg-green-500 hover:text-white shadow-sm hover:shadow-md transition-all duration-300">
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="hidden md:flex border-green-500 text-green-600 hover:bg-green-500 hover:text-white shadow-sm hover:shadow-md transition-all duration-300"
+              onClick={() => navigate('/nadra-verification')}
+            >
               <Shield className="h-4 w-4 mr-2" />
               NADRA Verify
             </Button>
             
-            <Button variant="ghost" size="icon" className="hidden md:flex hover:bg-orange-100 hover:shadow-md transition-all duration-300">
+            <Button variant="ghost" size="icon" className="hidden md:flex hover:bg-gray-100 hover:shadow-md transition-all duration-300">
               <Search className="h-5 w-5 text-gray-600" />
             </Button>
-            <Button variant="ghost" size="icon" className="hover:bg-orange-100 hover:shadow-md transition-all duration-300">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="hover:bg-gray-100 hover:shadow-md transition-all duration-300"
+              onClick={() => navigate('/signin')}
+            >
               <User className="h-5 w-5 text-gray-600" />
             </Button>
-            <Button variant="ghost" size="icon" className="hover:bg-orange-100 hover:shadow-md transition-all duration-300">
+            <Button variant="ghost" size="icon" className="hover:bg-gray-100 hover:shadow-md transition-all duration-300">
               <ShoppingBag className="h-5 w-5 text-gray-600" />
             </Button>
             
@@ -83,7 +93,7 @@ export function Header() {
             <Button
               variant="ghost"
               size="icon"
-              className="lg:hidden hover:bg-orange-100 hover:shadow-md transition-all duration-300"
+              className="lg:hidden hover:bg-gray-100 hover:shadow-md transition-all duration-300"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -99,9 +109,9 @@ export function Header() {
                 <button
                   key={item.name}
                   onClick={() => handleTabClick(item.name, item.href)}
-                  className={`block w-full text-left px-4 py-3 text-base font-medium rounded-lg transition-all duration-300 hover:bg-orange-50 hover:text-orange-600 hover:shadow-md ${
+                  className={`block w-full text-left px-4 py-3 text-base font-medium rounded-lg transition-all duration-300 hover:bg-gray-100 hover:text-black hover:shadow-md ${
                     activeTab === item.name
-                      ? 'bg-orange-100 text-orange-600 shadow-md border-l-4 border-orange-500'
+                      ? 'bg-black text-white shadow-md'
                       : 'text-gray-700'
                   }`}
                 >
@@ -109,11 +119,15 @@ export function Header() {
                 </button>
               ))}
               <div className="pt-4 border-t border-gray-200 space-y-3">
-                <Button variant="ghost" className="w-full justify-start hover:bg-orange-100 hover:shadow-md transition-all duration-300">
+                <Button variant="ghost" className="w-full justify-start hover:bg-gray-100 hover:shadow-md transition-all duration-300">
                   <Search className="h-5 w-5 mr-2" />
                   Search
                 </Button>
-                <Button variant="outline" className="w-full justify-start border-green-500 text-green-600 hover:bg-green-500 hover:text-white shadow-sm hover:shadow-md transition-all duration-300">
+                <Button 
+                  variant="outline" 
+                  className="w-full justify-start border-green-500 text-green-600 hover:bg-green-500 hover:text-white shadow-sm hover:shadow-md transition-all duration-300"
+                  onClick={() => navigate('/nadra-verification')}
+                >
                   <Shield className="h-5 w-5 mr-2" />
                   NADRA Verification
                 </Button>
