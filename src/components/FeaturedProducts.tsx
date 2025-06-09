@@ -67,7 +67,7 @@ export function FeaturedProducts() {
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center space-y-4 mb-16">
-          <p className="text-orange-600 uppercase tracking-wider text-sm font-medium">
+          <p className="uppercase tracking-wider text-sm font-medium text-slate-900">
             Featured Collection
           </p>
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
