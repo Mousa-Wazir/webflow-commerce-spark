@@ -39,9 +39,7 @@ export function Header() {
         <div className="flex items-center justify-between h-16 bg-slate-100">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <button onClick={() => navigate('/')} className="text-2xl font-bold text-black">
-              LocalRent
-            </button>
+            <button onClick={() => navigate('/')} className="text-2xl font-bold text-black">Localena</button>
           </div>
 
           {/* Desktop Navigation */}
