@@ -1,26 +1,21 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { toast } from '@/hooks/use-toast';
-
 export function Newsletter() {
   const [email, setEmail] = useState('');
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
       toast({
         title: "Subscribed!",
-        description: "Thank you for subscribing to our newsletter.",
+        description: "Thank you for subscribing to our newsletter."
       });
       setEmail('');
     }
   };
-
-  return (
-    <section className="py-20 bg-gradient-to-r from-orange-500 to-yellow-500 text-white">
-      <div className="container mx-auto px-4">
+  return <section className="py-20 bg-gradient-to-r from-orange-500 to-yellow-500 text-white bg-slate-300">
+      <div className="container mx-auto px-4 bg-slate-300">
         <div className="max-w-2xl mx-auto text-center space-y-8">
           <div className="space-y-4">
             <h2 className="text-4xl md:text-5xl font-bold">
@@ -32,14 +27,7 @@ export function Newsletter() {
           </div>
 
           <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            <Input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="flex-1 bg-white text-gray-900 border-white/20 placeholder:text-gray-500"
-            />
+            <Input type="email" placeholder="Enter your email" value={email} onChange={e => setEmail(e.target.value)} required className="flex-1 bg-white text-gray-900 border-white/20 placeholder:text-gray-500" />
             <Button type="submit" variant="secondary" className="bg-white text-orange-600 hover:bg-gray-100">
               Subscribe
             </Button>
@@ -61,6 +49,5 @@ export function Newsletter() {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 }
