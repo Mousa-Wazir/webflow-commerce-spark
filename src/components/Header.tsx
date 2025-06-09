@@ -1,23 +1,37 @@
-
 import { useState } from 'react';
 import { Menu, Search, ShoppingBag, User, X, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState('Home');
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const navItems = [
-    { name: 'Home', href: '#' },
-    { name: 'Products', href: '#' },
+    { name: 'Home', href: '/' },
+    { name: 'Products', href: '/products' },
     { name: 'About Us', href: '#' },
     { name: 'Contact Us', href: '#' },
   ];
 
-  const handleTabClick = (tabName: string) => {
-    setActiveTab(tabName);
+  const getActiveTab = () => {
+    const currentPath = location.pathname;
+    const activeItem = navItems.find(item => item.href === currentPath);
+    return activeItem?.name || 'Home';
+  };
+
+  const handleTabClick = (tabName: string, href: string) => {
+    if (href.startsWith('#')) {
+      // Handle anchor links or show coming soon
+      console.log(`${tabName} coming soon`);
+    } else {
+      navigate(href);
+    }
     setIsMenuOpen(false);
   };
+
+  const activeTab = getActiveTab();
 
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 border-b border-gray-200 shadow-lg">
@@ -25,7 +39,9 @@ export function Header() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <h1 className="text-2xl font-bold text-orange-600">LocalRent</h1>
+            <button onClick={() => navigate('/')} className="text-2xl font-bold text-orange-600">
+              LocalRent
+            </button>
           </div>
 
           {/* Desktop Navigation */}
@@ -33,7 +49,7 @@ export function Header() {
             {navItems.map((item) => (
               <button
                 key={item.name}
-                onClick={() => handleTabClick(item.name)}
+                onClick={() => handleTabClick(item.name, item.href)}
                 className={`px-6 py-2 text-sm font-medium rounded-lg transition-all duration-300 hover:bg-orange-50 hover:text-orange-600 hover:shadow-md ${
                   activeTab === item.name
                     ? 'bg-orange-100 text-orange-600 shadow-md border-b-2 border-orange-500'
@@ -82,7 +98,7 @@ export function Header() {
               {navItems.map((item) => (
                 <button
                   key={item.name}
-                  onClick={() => handleTabClick(item.name)}
+                  onClick={() => handleTabClick(item.name, item.href)}
                   className={`block w-full text-left px-4 py-3 text-base font-medium rounded-lg transition-all duration-300 hover:bg-orange-50 hover:text-orange-600 hover:shadow-md ${
                     activeTab === item.name
                       ? 'bg-orange-100 text-orange-600 shadow-md border-l-4 border-orange-500'

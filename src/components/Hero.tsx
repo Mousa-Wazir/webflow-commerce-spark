@@ -1,8 +1,11 @@
 
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Shield } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export function Hero() {
+  const navigate = useNavigate();
+
   return (
     <section className="relative min-h-[70vh] flex items-center">
       {/* Banner Image Background */}
@@ -31,7 +34,11 @@ export function Hero() {
           </div>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="group bg-yellow-500 hover:bg-yellow-600 text-black font-semibold">
+            <Button 
+              size="lg" 
+              className="group bg-yellow-500 hover:bg-yellow-600 text-black font-semibold"
+              onClick={() => navigate('/products')}
+            >
               Explore Products
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Button>
