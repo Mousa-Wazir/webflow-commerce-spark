@@ -14,7 +14,7 @@ export function Newsletter() {
       setEmail('');
     }
   };
-  return <section className="py-20 bg-gradient-to-r from-orange-500 to-yellow-500 text-white bg-slate-300">
+  return <section className="py-20 bg-gradient-to-r from-gray-500 to-black-500 text-white bg-slate-300">
       <div className="container mx-auto px-4 bg-slate-300">
         <div className="max-w-2xl mx-auto text-center space-y-8">
           <div className="space-y-4">
