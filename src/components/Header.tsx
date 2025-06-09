@@ -54,7 +54,7 @@ export function Header() {
           {/* Right Icons */}
           <div className="flex items-center space-x-3">
             {/* NADRA Verification - Prominent */}
-            <Button variant="outline" size="sm" className="hidden md:flex border-green-500 text-green-600 hover:bg-green-500 hover:text-white shadow-sm hover:shadow-md transition-all duration-300" onClick={() => navigate('/nadra-verification')}>
+            <Button variant="outline" size="sm" onClick={() => navigate('/nadra-verification')} className="hidden md:flex border-green-500 text-green-600 hover:text-white shadow-sm hover:shadow-md transition-all duration-300 bg-green-600 hover:bg-green-500">
               <Shield className="h-4 w-4 mr-2" />
               NADRA Verify
             </Button>
