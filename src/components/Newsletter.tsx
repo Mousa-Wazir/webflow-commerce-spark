@@ -19,15 +19,15 @@ export function Newsletter() {
   };
 
   return (
-    <section className="py-20 bg-foreground text-background">
+    <section className="py-20 bg-gradient-to-r from-orange-500 to-yellow-500 text-white">
       <div className="container mx-auto px-4">
         <div className="max-w-2xl mx-auto text-center space-y-8">
           <div className="space-y-4">
             <h2 className="text-4xl md:text-5xl font-bold">
-              Stay in the Loop
+              Stay Connected
             </h2>
-            <p className="text-background/80 text-lg">
-              Be the first to know about new collections, exclusive offers, and fashion insights.
+            <p className="text-white/90 text-lg">
+              Get notified about new local products, rental deals, and exclusive offers from verified creators in your area.
             </p>
           </div>
 
@@ -38,25 +38,25 @@ export function Newsletter() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="flex-1 bg-background text-foreground border-background/20"
+              className="flex-1 bg-white text-gray-900 border-white/20 placeholder:text-gray-500"
             />
-            <Button type="submit" variant="secondary">
+            <Button type="submit" variant="secondary" className="bg-white text-orange-600 hover:bg-gray-100">
               Subscribe
             </Button>
           </form>
 
-          <div className="flex items-center justify-center gap-8 text-sm text-background/60">
-            <div>
-              <div className="font-semibold text-background text-xl">10k+</div>
+          <div className="flex items-center justify-center gap-8 text-sm text-white/80">
+            <div className="text-center">
+              <div className="font-semibold text-white text-xl">5k+</div>
               <div>Subscribers</div>
             </div>
-            <div>
-              <div className="font-semibold text-background text-xl">Weekly</div>
+            <div className="text-center">
+              <div className="font-semibold text-white text-xl">Weekly</div>
               <div>Updates</div>
             </div>
-            <div>
-              <div className="font-semibold text-background text-xl">Exclusive</div>
-              <div>Offers</div>
+            <div className="text-center">
+              <div className="font-semibold text-white text-xl">Verified</div>
+              <div>Products</div>
             </div>
           </div>
         </div>
