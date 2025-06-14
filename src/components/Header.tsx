@@ -37,14 +37,14 @@ export function Header() {
   const activeTab = getActiveTab();
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 border-b border-[#E0E0E0] shadow-sm">
+    <header className="sticky top-0 z-50 bg-gray-600 backdrop-blur supports-[backdrop-filter]:bg-gray-600/90 border-b border-[#E0E0E0] shadow-sm">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
             <button
               onClick={() => navigate('/')}
-              className="text-2xl font-extrabold text-[#222] tracking-tight hover:text-[#000] transition-colors"
+              className="text-2xl font-extrabold text-white tracking-tight hover:text-gray-200 transition-colors"
             >
               Localena
             </button>
@@ -59,8 +59,8 @@ export function Header() {
                 }}
                 className={`px-4 py-2 text-sm rounded-lg font-medium transition-all duration-200 ${
                   activeTab === item.name
-                    ? 'bg-[#222] text-white shadow-sm'
-                    : 'text-[#444] hover:bg-[#F1F1F1] hover:text-[#000]'
+                    ? 'bg-white text-gray-800 shadow-sm'
+                    : 'text-gray-100 hover:bg-gray-500 hover:text-white'
                 }`}
               >
                 {item.name}
@@ -73,7 +73,7 @@ export function Header() {
             <Button
               variant="ghost"
               size="icon"
-              className="text-[#222] hover:bg-[#F1F1F1] transition-all duration-200"
+              className="text-white hover:bg-gray-500 transition-all duration-200"
               onClick={handleWishlistClick}
               aria-label="Wishlist"
             >
@@ -83,7 +83,7 @@ export function Header() {
             <Button
               variant="ghost"
               size="icon"
-              className="text-[#222] hover:bg-[#F1F1F1] transition-all duration-200"
+              className="text-white hover:bg-gray-500 transition-all duration-200"
               onClick={handleCartClick}
               aria-label="Cart"
             >
@@ -93,7 +93,7 @@ export function Header() {
             <Button
               variant="ghost"
               size="icon"
-              className="text-[#222] hover:bg-[#F1F1F1] transition-all duration-200"
+              className="text-white hover:bg-gray-500 transition-all duration-200"
               onClick={() => navigate('/signin')}
             >
               <User className="h-5 w-5" />
@@ -102,7 +102,7 @@ export function Header() {
             <Button
               variant="ghost"
               size="icon"
-              className="lg:hidden text-[#222] hover:bg-[#F1F1F1] transition-all duration-200"
+              className="lg:hidden text-white hover:bg-gray-500 transition-all duration-200"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -111,7 +111,7 @@ export function Header() {
         </div>
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="lg:hidden border-t border-[#E0E0E0] bg-white shadow-lg">
+          <div className="lg:hidden border-t border-[#E0E0E0] bg-gray-600 shadow-lg">
             <nav className="py-4 space-y-2">
               {navItems.map((item) => (
                 <button
@@ -122,8 +122,8 @@ export function Header() {
                   }}
                   className={`block w-full text-left px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 ${
                     activeTab === item.name
-                      ? 'bg-[#222] text-white shadow-sm'
-                      : 'text-[#444] hover:bg-[#F1F1F1] hover:text-[#000]'
+                      ? 'bg-white text-gray-800 shadow-sm'
+                      : 'text-gray-100 hover:bg-gray-500 hover:text-white'
                   }`}
                 >
                   {item.name}
@@ -132,14 +132,14 @@ export function Header() {
               <div className="pt-4 border-t border-[#E0E0E0] space-y-3">
                 <Button
                   variant="ghost"
-                  className="w-full justify-start text-[#222] hover:bg-[#F1F1F1]"
+                  className="w-full justify-start text-white hover:bg-gray-500"
                 >
                   <Search className="h-5 w-5 mr-2" />
                   Search
                 </Button>
                 <Button
                   variant="ghost"
-                  className="w-full justify-start text-[#222] hover:bg-[#F1F1F1]"
+                  className="w-full justify-start text-white hover:bg-gray-500"
                   onClick={handleWishlistClick}
                 >
                   <Heart className="h-5 w-5 mr-2" />
@@ -147,7 +147,7 @@ export function Header() {
                 </Button>
                 <Button
                   variant="ghost"
-                  className="w-full justify-start text-[#222] hover:bg-[#F1F1F1]"
+                  className="w-full justify-start text-white hover:bg-gray-500"
                   onClick={handleCartClick}
                 >
                   <ShoppingBag className="h-5 w-5 mr-2" />
