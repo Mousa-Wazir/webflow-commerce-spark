@@ -8,19 +8,19 @@ export function Hero() {
 
   return (
     <section className="relative min-h-[70vh] flex items-center bg-gradient-to-tr from-[#f8f8f8] via-[#fafafa] to-white">
-      {/* Modern geometric overlay */}
-      <div className="absolute inset-0 pointer-events-none">
-        <svg className="w-full h-full" viewBox="0 0 1440 450" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-          <defs>
-            <linearGradient id="bannerFade" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
-              <stop stopColor="#f8f8f8" />
-              <stop offset="1" stopColor="#fff" />
-            </linearGradient>
-          </defs>
-          <rect x="0" y="0" width="1440" height="450" fill="url(#bannerFade)" />
-          <circle cx="420" cy="100" r="96" fill="#F3F3F3" opacity="0.7"/>
-          <circle cx="1200" cy="300" r="120" fill="#EBEBEB" opacity="0.5"/>
-        </svg>
+      {/* Landscape Hero Image */}
+      <div className="absolute inset-0 w-full h-full z-0">
+        <img
+          src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1440&h=450&fit=crop"
+          alt="Landscape hero for Localena categories"
+          className="w-full h-[450px] object-cover"
+          style={{ objectPosition: "center" }}
+        />
+        {/* Modern geometric overlay for soft fade */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: "linear-gradient(to top, rgba(255,255,255,0.92), rgba(255,255,255,0.40) 80%, transparent)" }}
+        />
       </div>
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center space-y-8 py-12 md:py-28 animate-fade-in">
@@ -39,16 +39,17 @@ export function Hero() {
               className="btn-primary text-lg font-bold shadow-lg btn-animate"
               onClick={() => navigate('/products')}
             >
-              Browse Products
+              Shop Now
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Button>
             <Button
               variant="outline"
               size="lg"
-              className="btn-outline font-semibold btn-animate"
-              onClick={() => navigate('/about')}
+              className="btn-outline font-semibold btn-animate flex items-center gap-2"
+              onClick={() => navigate('/nadra-verification')}
             >
-              Learn About Us
+              <Shield className="h-5 w-5" />
+              Identity Verification
             </Button>
           </div>
           <div className="flex items-center justify-center gap-12 text-sm text-[#555] pt-8">
@@ -72,3 +73,4 @@ export function Hero() {
     </section>
   );
 }
+
