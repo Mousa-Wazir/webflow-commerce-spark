@@ -39,9 +39,14 @@ body {
 .marketplace-card {
   @apply bg-white border border-[#E0E0E0] rounded-xl shadow-sm transition-all duration-300;
   box-shadow: var(--shadow);
+  /* new: make slight scale and shadow pop on hover */
+  transition: transform 0.25s cubic-bezier(.4,0,.2,1), box-shadow 0.25s cubic-bezier(.4,0,.2,1);
 }
 .marketplace-card:hover {
   box-shadow: var(--shadow-hover);
+  /* more pronounced and smooth scaling */
+  transform: translateY(-4px) scale(1.05);
+  filter: brightness(1.02);
 }
 
 /* Buttons */
@@ -50,6 +55,8 @@ body {
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
   will-change: transform, opacity;
+  /* enhance button transition for hover */
+  transition: transform 0.17s cubic-bezier(.4,0,.2,1), box-shadow 0.17s cubic-bezier(.4,0,.2,1), background 0.15s linear;
 }
 .marketplace-button:active, .btn-primary:active {
   @apply scale-95;
@@ -59,6 +66,13 @@ body {
 .btn-outline {
   @apply border border-[#E0E0E0] text-[#222] bg-white hover:bg-[#f4f4f4] rounded-lg transition-all duration-300;
   border-radius: var(--radius-lg);
+  /* add stronger hover effect */
+  transition: transform 0.17s cubic-bezier(.4,0,.2,1), box-shadow 0.17s cubic-bezier(.4,0,.2,1), background 0.15s linear;
+}
+.btn-outline:hover {
+  filter: brightness(1.05);
+  box-shadow: 0 8px 32px 0 rgba(44, 62, 80, 0.11);
+  transform: scale(1.045);
 }
 
 /* Inputs */
@@ -73,13 +87,22 @@ body {
   .card-hover {
     @apply transition-all duration-300;
     box-shadow: var(--shadow);
+    transition: transform 0.25s cubic-bezier(.4,0,.2,1), box-shadow 0.25s cubic-bezier(.4,0,.2,1);
   }
   .card-hover:hover {
-    box-shadow: var(--shadow-hover);
-    transform: translateY(-4px) scale(1.02);
+    box-shadow: var(--shadow-hover), 0 10px 40px 0 rgba(59,130,246,.11);
+    transform: translateY(-6px) scale(1.06);
+    filter: brightness(1.035);
   }
   .btn-animate {
     @apply transition-transform duration-200;
+    /* add shadow and scale effect for button hovers */
+    transition: transform 0.17s cubic-bezier(.4,0,.2,1), box-shadow 0.17s cubic-bezier(.4,0,.2,1);
+  }
+  .btn-animate:hover {
+    transform: scale(1.045);
+    box-shadow: 0 6px 18px 0 rgba(44, 62, 80, 0.13);
+    filter: brightness(1.03);
   }
   .btn-animate:active {
     @apply scale-95;
