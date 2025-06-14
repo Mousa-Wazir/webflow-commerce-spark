@@ -1,4 +1,3 @@
-
 import { Facebook, Instagram, Twitter, Youtube } from 'lucide-react';
 
 export function Footer() {
@@ -43,21 +42,21 @@ export function Footer() {
   ];
 
   return (
-    <footer className="bg-slate-900 border-t border-slate-700">
+    <footer className="bg-[#222] border-t border-[#E0E0E0]">
       <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Brand Section */}
           <div className="lg:col-span-2 space-y-6">
             <h3 className="text-2xl font-bold text-white">Localena</h3>
-            <p className="text-slate-400 max-w-md">
-              Connecting local creators with community members through unique, rentable products that celebrate craftsmanship and creativity.
+            <p className="text-[#ccc] max-w-md">
+              Connecting local creators with your community, made easy and secure through identity verification and trust.
             </p>
             <div className="flex space-x-4">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
-                  className="text-slate-400 hover:text-white transition-colors duration-200"
+                  className="text-[#ccc] hover:text-white transition-colors duration-200"
                   aria-label={social.label}
                 >
                   <social.icon className="h-5 w-5" />
@@ -75,7 +74,7 @@ export function Footer() {
                   <li key={link.name}>
                     <a
                       href={link.href}
-                      className="text-slate-400 hover:text-white transition-colors duration-200"
+                      className="text-[#bbb] hover:text-white transition-colors duration-200"
                     >
                       {link.name}
                     </a>
@@ -87,19 +86,19 @@ export function Footer() {
         </div>
 
         {/* Bottom Section */}
-        <div className="mt-12 pt-8 border-t border-slate-700">
+        <div className="mt-12 pt-8 border-t border-[#E0E0E0]">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p className="text-slate-400 text-sm">
+            <p className="text-[#bbb] text-sm">
               © 2024 Localena. All rights reserved.
             </p>
             <div className="flex space-x-6 text-sm">
-              <a href="#" className="text-slate-400 hover:text-white transition-colors duration-200">
+              <a href="#" className="text-[#bbb] hover:text-white transition-colors duration-200">
                 Privacy Policy
               </a>
-              <a href="#" className="text-slate-400 hover:text-white transition-colors duration-200">
+              <a href="#" className="text-[#bbb] hover:text-white transition-colors duration-200">
                 Terms of Service
               </a>
-              <a href="#" className="text-slate-400 hover:text-white transition-colors duration-200">
+              <a href="#" className="text-[#bbb] hover:text-white transition-colors duration-200">
                 Cookie Policy
               </a>
             </div>

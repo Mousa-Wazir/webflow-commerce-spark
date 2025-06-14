@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
@@ -70,7 +69,7 @@ const NADRAVerification = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#F8F8F8]">
       <Header />
       
       <div className="container mx-auto px-4 py-8">
@@ -78,11 +77,11 @@ const NADRAVerification = () => {
           {/* Header Section */}
           <div className="text-center mb-12">
             <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm">
-              <Shield className="h-10 w-10 text-green-600" />
+              <Shield className="h-10 w-10 text-[#4CAF50]" />
             </div>
-            <h1 className="text-4xl font-bold text-black mb-4">NADRA Verification</h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Verify your identity through NADRA to build trust and unlock all platform features
+            <h1 className="text-4xl font-bold text-[#222] mb-4">Identity Verification</h1>
+            <p className="text-xl text-[#555] max-w-2xl mx-auto">
+              Verify your identity to build trust and unlock all platform features.
             </p>
           </div>
 
@@ -163,7 +162,7 @@ const NADRAVerification = () => {
               {/* How It Works */}
               <Card className="marketplace-card">
                 <CardHeader>
-                  <CardTitle>How NADRA Verification Works</CardTitle>
+                  <CardTitle>How Identity Verification Works</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
@@ -181,7 +180,7 @@ const NADRAVerification = () => {
                         2
                       </div>
                       <div>
-                        <h3 className="font-medium text-black">NADRA Verification</h3>
+                        <h3 className="font-medium text-black">Identity Verification</h3>
                         <p className="text-sm text-gray-600">We verify your identity through NADRA database</p>
                       </div>
                     </div>
