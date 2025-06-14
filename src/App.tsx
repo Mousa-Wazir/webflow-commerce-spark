@@ -1,3 +1,4 @@
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from '@/components/ui/toaster';
 import Index from './pages/Index';
@@ -10,6 +11,8 @@ import SignUp from './pages/SignUp';
 import CustomerDashboard from './pages/CustomerDashboard';
 import NotFound from './pages/NotFound';
 import { CartWishlistProvider } from "@/store/CartWishlistContext";
+import Cart from './pages/Cart';
+import Wishlist from './pages/Wishlist';
 
 function App() {
   return (
@@ -24,6 +27,8 @@ function App() {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/dashboard" element={<CustomerDashboard />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/wishlist" element={<Wishlist />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Toaster />

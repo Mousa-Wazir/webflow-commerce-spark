@@ -3,12 +3,13 @@ import { useState } from 'react';
 import { Menu, Search, Heart, User, X, ShoppingBag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useCartWishlist } from '@/store/CartWishlistContext';
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [wishlist, setWishlist] = useState([] as string[]);
   const navigate = useNavigate();
   const location = useLocation();
+  const { cart, wishlist } = useCartWishlist();
 
   const navItems = [
     { name: 'Home', href: '/' },
@@ -21,17 +22,6 @@ export function Header() {
     const currentPath = location.pathname;
     const activeItem = navItems.find((item) => item.href === currentPath);
     return activeItem?.name || 'Home';
-  };
-
-  // Wishlist demo logic: store in state
-  const handleWishlistClick = () => {
-    // Navigate to wishlist or show a toast (demo)
-    alert('Wishlist coming soon!');
-  };
-
-  const handleCartClick = () => {
-    // Navigate or show a toast
-    alert('Cart feature coming soon!');
   };
 
   const activeTab = getActiveTab();
@@ -70,25 +60,35 @@ export function Header() {
           {/* Right Icons */}
           <div className="flex items-center space-x-3">
             {/* Wishlist */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-white hover:bg-gray-500 transition-all duration-200"
-              onClick={handleWishlistClick}
-              aria-label="Wishlist"
-            >
-              <Heart className="h-5 w-5" />
-            </Button>
+            <div className="relative">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-white hover:bg-gray-500 transition-all duration-200"
+                onClick={() => navigate('/wishlist')}
+                aria-label="Wishlist"
+              >
+                <Heart className="h-5 w-5" />
+                {wishlist.length > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full border border-white">{wishlist.length}</span>
+                )}
+              </Button>
+            </div>
             {/* Cart */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-white hover:bg-gray-500 transition-all duration-200"
-              onClick={handleCartClick}
-              aria-label="Cart"
-            >
-              <ShoppingBag className="h-5 w-5" />
-            </Button>
+            <div className="relative">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-white hover:bg-gray-500 transition-all duration-200"
+                onClick={() => navigate('/cart')}
+                aria-label="Cart"
+              >
+                <ShoppingBag className="h-5 w-5" />
+                {cart.length > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-green-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full border border-white">{cart.length}</span>
+                )}
+              </Button>
+            </div>
             {/* User / Auth */}
             <Button
               variant="ghost"
@@ -139,19 +139,31 @@ export function Header() {
                 </Button>
                 <Button
                   variant="ghost"
-                  className="w-full justify-start text-white hover:bg-gray-500"
-                  onClick={handleWishlistClick}
+                  className="w-full justify-start text-white hover:bg-gray-500 relative"
+                  onClick={() => {
+                    navigate('/wishlist');
+                    setIsMenuOpen(false);
+                  }}
                 >
                   <Heart className="h-5 w-5 mr-2" />
                   Wishlist
+                  {wishlist.length > 0 && (
+                    <span className="absolute top-1 right-8 bg-red-500 text-white text-xs font-bold px-1 py-0.5 rounded-full border border-white">{wishlist.length}</span>
+                  )}
                 </Button>
                 <Button
                   variant="ghost"
-                  className="w-full justify-start text-white hover:bg-gray-500"
-                  onClick={handleCartClick}
+                  className="w-full justify-start text-white hover:bg-gray-500 relative"
+                  onClick={() => {
+                    navigate('/cart');
+                    setIsMenuOpen(false);
+                  }}
                 >
                   <ShoppingBag className="h-5 w-5 mr-2" />
                   Cart
+                  {cart.length > 0 && (
+                    <span className="absolute top-1 right-7 bg-green-500 text-white text-xs font-bold px-1 py-0.5 rounded-full border border-white">{cart.length}</span>
+                  )}
                 </Button>
               </div>
             </nav>
