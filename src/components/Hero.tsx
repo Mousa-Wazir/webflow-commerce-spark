@@ -7,27 +7,29 @@ export function Hero() {
   const navigate = useNavigate();
 
   return (
-    <section className="relative min-h-[70vh] flex items-center bg-[#44C774]">
+    <section className="relative min-h-[70vh] flex items-center bg-[#212121]">
       {/* Landscape Hero Image - Used category wall art product */}
       <div className="absolute inset-0 w-full h-full z-0">
         <img
           src="https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=1440&h=450&fit=crop"
           alt="Handwoven wall art - Home Decor category"
-          className="w-full h-[450px] object-cover mix-blend-multiply"
+          className="w-full h-[450px] object-cover mix-blend-luminosity"
           style={{ objectPosition: "center" }}
         />
-        {/* Overlay for stronger green tint and white text legibility */}
+        {/* Overlay for a strong gray-black tint and white text legibility */}
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{ background: "linear-gradient(to top, rgba(68,199,116,0.98), rgba(68,199,116,0.88) 80%, rgba(68,199,116,0.7))" }}
+          style={{
+            background: "linear-gradient(to top, rgba(33,33,33,0.97), rgba(40,40,40,0.85) 75%, rgba(66,66,66,0.6) 100%)"
+          }}
         />
       </div>
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center space-y-8 py-12 md:py-28 animate-fade-in">
           <div className="space-y-6">
-            <h1 className="h1 leading-tight text-white font-bold">
-              Unlock <span className="text-white font-bold">Local Rentals</span><br />
-              <span className="bg-gradient-to-r from-white to-[#dcffe0] bg-clip-text text-transparent font-bold">Effortlessly & Securely.</span>
+            <h1 className="h1 leading-tight text-white font-extrabold">
+              Unlock <span className="text-white font-extrabold">Local Rentals</span><br />
+              <span className="bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent font-extrabold">Effortlessly & Securely.</span>
             </h1>
             <p className="subtitle max-w-2xl mx-auto leading-relaxed text-white font-semibold">
               Find and rent unique products from skilled creators in your community.<br className="hidden md:inline" /> Modern, trusted, and built for the way you live.
@@ -36,7 +38,7 @@ export function Hero() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               size="lg"
-              className="btn-primary text-lg font-bold shadow-lg btn-animate"
+              className="bg-black hover:bg-gray-800 text-white font-bold shadow-lg btn-animate"
               onClick={() => navigate('/products')}
             >
               Shop Now
@@ -44,8 +46,7 @@ export function Hero() {
             </Button>
             <Button
               size="lg"
-              className="bg-[#266a41] hover:bg-[#1c5131] text-white font-semibold btn-animate flex items-center gap-2 border-none shadow-lg"
-              // distinct green background!
+              className="bg-gray-700 hover:bg-gray-900 text-white font-semibold btn-animate flex items-center gap-2 border-none shadow-lg"
               onClick={() => navigate('/nadra-verification')}
             >
               <Shield className="h-5 w-5" />
