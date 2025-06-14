@@ -1,4 +1,3 @@
-
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Shield } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -7,51 +6,56 @@ export function Hero() {
   const navigate = useNavigate();
 
   return (
-    <section className="relative min-h-[70vh] flex items-center bg-black">
-      {/* Landscape Hero Image - Used Handicrafts category (Ceramic Pottery Collection) */}
-      <div className="absolute inset-0 w-full h-full z-0">
+    <section className="relative min-h-[70vh] flex items-center bg-black overflow-hidden">
+      {/* Attractive Landscape Hero Image */}
+      <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
         <img
-          src="https://images.unsplash.com/photo-1472396961693-142e6e269027?w=1440&h=500&fit=crop"
-          alt="Ceramic Pottery Collection - Handicrafts category"
-          className="w-full h-[500px] object-cover"
-          style={{ objectPosition: "center" }}
-        />
-        {/* Overlay for legibility: soft dark at bottom, transparent top */}
-        <div
-          className="absolute inset-0 pointer-events-none"
+          src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1440&h=540&fit=crop"
+          alt="Green Mountains Landscape"
+          className="w-full h-[540px] object-cover object-center"
           style={{
-            background: 
-              "linear-gradient(to top, rgba(20,20,20,0.78) 65%, rgba(30,30,30,0.15) 100%, transparent)"
+            filter: 'brightness(0.85) contrast(1.08)'
+          }}
+        />
+        {/* Subtle overlay: helps text pop but keeps image visible */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'linear-gradient(to top, rgba(10,10,10,0.84) 60%, rgba(20,20,20,0.16) 92%, transparent 100%)'
           }}
         />
       </div>
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-4xl mx-auto text-center space-y-8 py-12 md:py-28 animate-fade-in">
+      {/* Main content over the image */}
+      <div className="container mx-auto px-4 relative z-10 flex flex-col items-center justify-center w-full">
+        <div className="max-w-4xl w-full mx-auto text-center space-y-8 py-10 md:py-24 animate-fade-in flex flex-col items-center">
           <div className="space-y-6">
-            <h1 className="h1 leading-tight text-white font-extrabold drop-shadow">
-              Unlock <span className="text-white font-extrabold">Local Rentals</span>
+            <h1 className="h1 leading-tight font-extrabold drop-shadow-xl text-white">
+              Unlock{' '}
+              <span className="text-white font-extrabold">Local Rentals</span>
               <br />
-              <span className="bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent font-extrabold">
+              <span className="bg-gradient-to-r from-[#fff] via-[#6ee7b7] to-[#3b82f6] bg-clip-text text-transparent font-extrabold">
                 Effortlessly & Securely.
               </span>
             </h1>
-            <p className="subtitle max-w-2xl mx-auto leading-relaxed text-white font-semibold drop-shadow">
+            <p className="subtitle max-w-2xl mx-auto leading-relaxed font-semibold text-white/90 drop-shadow-md">
               Find and rent unique products from skilled creators in your community.
               <br className="hidden md:inline" /> Modern, trusted, and built for the way you live.
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          {/* Buttons overlaid on the image */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center w-full items-center">
             <Button
               size="lg"
-              className="bg-black hover:bg-gray-800 text-white font-bold shadow-lg btn-animate"
+              className="btn-animate bg-white hover:bg-gray-100 text-black font-bold shadow-lg border border-black/10 transition-transform duration-200"
               onClick={() => navigate('/products')}
             >
               Shop Now
-              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1" />
             </Button>
             <Button
               size="lg"
-              className="bg-gray-700 hover:bg-gray-900 text-white font-semibold btn-animate flex items-center gap-2 border-none shadow-lg"
+              className="btn-animate bg-black/70 hover:bg-black text-white font-semibold flex items-center gap-2 shadow-lg border border-white/10"
               onClick={() => navigate('/nadra-verification')}
             >
               <Shield className="h-5 w-5" />
