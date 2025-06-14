@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Heart, ShoppingCart, Calendar } from 'lucide-react';
+import { useCartWishlist } from '@/store/CartWishlistContext';
+import { toast } from "@/hooks/use-toast";
 
 const products = [
   {
@@ -73,17 +75,12 @@ const products = [
 ];
 
 export function FeaturedProducts() {
-  // Wishlist state demonstration (would be global/context in real app)
-  const [wishlist, setWishlist] = useState<Set<number>>(new Set());
-
-  const toggleWishlist = (id: number) => {
-    setWishlist(prev => {
-      const copy = new Set(prev);
-      if (copy.has(id)) copy.delete(id);
-      else copy.add(id);
-      return copy;
-    });
-  };
+  const {
+    addToCart,
+    isInCart,
+    wishlistToggle,
+    isWishlisted,
+  } = useCartWishlist();
 
   return (
     <section className="py-20 bg-[#F8F8F8]">
@@ -132,23 +129,45 @@ export function FeaturedProducts() {
                 {/* Wishlist Icon */}
                 <button
                   className={`absolute top-4 right-4 h-9 w-9 flex items-center justify-center rounded-full shadow-md transition-colors duration-200 bg-white/90 ${
-                    wishlist.has(product.id) ? 'ring-2 ring-[#F44336]' : ''
+                    isWishlisted(product.id) ? 'ring-2 ring-[#F44336]' : ''
                   }`}
-                  aria-label={wishlist.has(product.id) ? 'Remove from wishlist' : 'Add to wishlist'}
-                  onClick={() => toggleWishlist(product.id)}
+                  aria-label={isWishlisted(product.id) ? 'Remove from wishlist' : 'Add to wishlist'}
+                  onClick={() => {
+                    wishlistToggle(product.id);
+                    toast({
+                      title: isWishlisted(product.id) ? "Removed from Wishlist" : "Added to Wishlist",
+                      description: product.name,
+                    });
+                  }}
                 >
                   <Heart
                     className={`h-5 w-5 text-[#F44336] transition-all duration-200 ${
-                      wishlist.has(product.id) ? 'fill-[#F44336]' : ''
+                      isWishlisted(product.id) ? 'fill-[#F44336]' : ''
                     }`}
-                    fill={wishlist.has(product.id) ? '#F44336' : 'none'}
+                    fill={isWishlisted(product.id) ? '#F44336' : 'none'}
                   />
                 </button>
                 {/* Action Buttons */}
                 <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 space-y-2">
-                  <Button className="w-full btn-primary shadow-lg btn-animate">
+                  <Button
+                    className="w-full btn-primary shadow-lg btn-animate"
+                    onClick={() => {
+                      if (!isInCart(product.id)) {
+                        addToCart(product.id);
+                        toast({
+                          title: "Added to cart",
+                          description: product.name,
+                        });
+                      } else {
+                        toast({
+                          title: "Product already in cart",
+                          description: product.name,
+                        });
+                      }
+                    }}
+                  >
                     <ShoppingCart className="mr-2 h-4 w-4" />
-                    Buy Now
+                    {isInCart(product.id) ? "In Cart" : "Buy Now"}
                   </Button>
                   {product.isRentable && (
                     <Button variant="outline" className="w-full btn-outline shadow-lg btn-animate">

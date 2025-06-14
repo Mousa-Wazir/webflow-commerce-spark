@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Header } from '@/components/Header';
@@ -8,6 +7,8 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ArrowLeft, Heart, Shield, Star } from 'lucide-react';
+import { useCartWishlist } from '@/store/CartWishlistContext';
+import { toast } from "@/hooks/use-toast";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -49,6 +50,13 @@ const ProductDetail = () => {
     { value: '1-week', label: '1 Week - $45' },
     { value: '1-month', label: '1 Month - $150' }
   ];
+
+  const {
+    addToCart,
+    isInCart,
+    wishlistToggle,
+    isWishlisted,
+  } = useCartWishlist();
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -202,16 +210,41 @@ const ProductDetail = () => {
 
             {/* Action Buttons */}
             <div className="flex gap-4">
-              <Button className="marketplace-button flex-1">
-                Buy Now - ${product.price}
+              <Button
+                className="marketplace-button flex-1"
+                onClick={() => {
+                  if (!isInCart(product.id)) {
+                    addToCart(product.id);
+                    toast({ title: "Added to cart", description: product.name });
+                  } else {
+                    toast({ title: "Product already in cart", description: product.name });
+                  }
+                }}
+                disabled={isInCart(product.id)}
+              >
+                {isInCart(product.id)
+                  ? `In Cart`
+                  : `Buy Now - $${product.price}`}
               </Button>
               {product.isRentable && (
                 <Button className="marketplace-button flex-1">
                   Rent Now
                 </Button>
               )}
-              <Button variant="outline" size="icon" className="border-gray-300 hover:bg-gray-100">
-                <Heart className="h-4 w-4" />
+              <Button
+                variant={isWishlisted(product.id) ? "default" : "outline"}
+                size="icon"
+                className={`border-gray-300 hover:bg-gray-100 ${isWishlisted(product.id) ? "ring-2 ring-[#F44336]" : ""}`}
+                onClick={() => {
+                  wishlistToggle(product.id);
+                  toast({
+                    title: isWishlisted(product.id) ? "Removed from Wishlist" : "Added to Wishlist",
+                    description: product.name,
+                  });
+                }}
+                aria-label={isWishlisted(product.id) ? 'Remove from wishlist' : 'Add to wishlist'}
+              >
+                <Heart className={`h-4 w-4 ${isWishlisted(product.id) ? "fill-[#F44336] text-[#F44336]" : ""}`} fill={isWishlisted(product.id) ? '#F44336' : 'none'} />
               </Button>
             </div>
 
