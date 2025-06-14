@@ -8,11 +8,11 @@ export function Hero() {
 
   return (
     <section className="relative min-h-[70vh] flex items-center bg-[#44C774]">
-      {/* Landscape Hero Image - switched to previous version, replace src if you want a different one */}
+      {/* Landscape Hero Image - Used category wall art product */}
       <div className="absolute inset-0 w-full h-full z-0">
         <img
-          src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1440&h=450&fit=crop" 
-          alt="Hero showing rental categories"
+          src="https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=1440&h=450&fit=crop"
+          alt="Handwoven wall art - Home Decor category"
           className="w-full h-[450px] object-cover mix-blend-multiply"
           style={{ objectPosition: "center" }}
         />
