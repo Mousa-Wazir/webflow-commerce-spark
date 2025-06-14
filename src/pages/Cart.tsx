@@ -1,4 +1,3 @@
-
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { Card } from '@/components/ui/card';
@@ -6,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { useCartWishlist } from '@/store/CartWishlistContext';
 import { useNavigate } from 'react-router-dom';
 import { ShoppingCart, Heart } from 'lucide-react';
+import { PaymentOptions } from "@/components/PaymentOptions";
 
 // Same demo data (should ideally be shared)
 const PRODUCT_MAP = {
@@ -57,64 +57,76 @@ export default function Cart() {
   const { cart, removeFromCart } = useCartWishlist();
   const navigate = useNavigate();
 
+  // Calculate total in PKR
+  const totalPKR = cart?.reduce((sum, item) => {
+    const product = PRODUCT_MAP[item.id];
+    return product ? sum + product.price * item.quantity : sum;
+  }, 0) || 0;
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Header />
       <div className="container mx-auto flex-1 px-4 py-8">
         <h2 className="text-3xl font-bold mb-6">Your Cart</h2>
         {cart && cart.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {cart.map((item) => {
-              const product = PRODUCT_MAP[item.id];
-              if (!product) return null;
-              return (
-                <Card
-                  key={item.id}
-                  className="p-0 overflow-hidden shadow-lg transition-all card-hover card-hover:hover:scale-105 group"
-                >
-                  <div className="relative aspect-[4/3] bg-gray-100">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                    />
-                    <Button
-                      size="icon"
-                      variant="ghost"
-                      className="absolute top-3 right-3 rounded-full bg-white/85 hover:bg-green-100 shadow"
-                      aria-label="Product in cart"
-                      disabled
-                    >
-                      <ShoppingCart className="text-green-500" />
-                    </Button>
-                  </div>
-                  <div className="p-5 flex flex-col gap-2">
-                    <h3 className="font-bold text-lg">{product.name}</h3>
-                    <div className="flex items-center justify-between w-full">
-                      <span className="text-sm text-gray-500">{product.category}</span>
-                      <span className="font-semibold text-[#222]">${product.price}</span>
-                    </div>
-                    <p className="text-gray-600 text-sm line-clamp-2">{product.description}</p>
-                    <div className="text-xs text-gray-500">Quantity: <span className="font-bold">{item.quantity}</span></div>
-                    <div className="mt-3 flex gap-2">
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {cart.map((item) => {
+                const product = PRODUCT_MAP[item.id];
+                if (!product) return null;
+                return (
+                  <Card
+                    key={item.id}
+                    className="p-0 overflow-hidden shadow-lg transition-all card-hover card-hover:hover:scale-105 group"
+                  >
+                    <div className="relative aspect-[4/3] bg-gray-100">
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                      />
                       <Button
-                        className="flex-1 btn-primary btn-animate font-semibold"
-                        variant="destructive"
-                        onClick={() => removeFromCart(item.id)}
+                        size="icon"
+                        variant="ghost"
+                        className="absolute top-3 right-3 rounded-full bg-white/85 hover:bg-green-100 shadow"
+                        aria-label="Product in cart"
+                        disabled
                       >
-                        Remove
+                        <ShoppingCart className="text-green-500" />
                       </Button>
                     </div>
-                  </div>
-                </Card>
-              );
-            })}
-            <div className="mt-8 flex justify-end col-span-full">
-              <Button size="lg" className="btn-primary" disabled>
-                Checkout (coming soon)
-              </Button>
+                    <div className="p-5 flex flex-col gap-2">
+                      <h3 className="font-bold text-lg">{product.name}</h3>
+                      <div className="flex items-center justify-between w-full">
+                        <span className="text-sm text-gray-500">{product.category}</span>
+                        <span className="font-semibold text-[#222]">
+                          PKR {product.price}
+                        </span>
+                      </div>
+                      <p className="text-gray-600 text-sm line-clamp-2">{product.description}</p>
+                      <div className="text-xs text-gray-500">Quantity: <span className="font-bold">{item.quantity}</span></div>
+                      <div className="mt-3 flex gap-2">
+                        <Button
+                          className="flex-1 btn-primary btn-animate font-semibold"
+                          variant="destructive"
+                          onClick={() => removeFromCart(item.id)}
+                        >
+                          Remove
+                        </Button>
+                      </div>
+                    </div>
+                  </Card>
+                );
+              })}
             </div>
-          </div>
+            {/* Show Checkout Summary & Payment */}
+            <div className="my-10 flex flex-col items-end">
+              <div className="text-lg font-semibold py-2">
+                Total: <span className="font-bold text-[#222]">PKR {totalPKR}</span>
+              </div>
+              <PaymentOptions amount={totalPKR} />
+            </div>
+          </>
         ) : (
           <div className="py-20 text-center space-y-4">
             <div className="text-gray-500">Your cart is empty.</div>
