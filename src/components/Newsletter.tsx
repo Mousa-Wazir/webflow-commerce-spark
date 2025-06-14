@@ -1,9 +1,12 @@
+
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { toast } from '@/hooks/use-toast';
+
 export function Newsletter() {
   const [email, setEmail] = useState('');
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
@@ -14,26 +17,38 @@ export function Newsletter() {
       setEmail('');
     }
   };
-  return <section className="py-20 bg--gray-500 to-black-500 text-white bg-slate-300">
-      <div className="gap-y-20 bg-gradient-to-tr from-gray-500 gap-y-20 text-white bg-slate-500">
+
+  return (
+    <section className="py-20 bg-gradient-to-br from-slate-900 to-slate-800">
+      <div className="container mx-auto px-4">
         <div className="max-w-2xl mx-auto text-center space-y-8">
           <div className="space-y-4">
-            <h2 className="text-4xl md:text-5xl font-bold">
+            <h2 className="text-4xl md:text-5xl font-bold text-white">
               Stay Connected
             </h2>
-            <p className="text-white/90 text-lg">
+            <p className="text-slate-300 text-lg">
               Get notified about new local products, rental deals, and exclusive offers from verified creators in your area.
             </p>
           </div>
 
           <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            <Input type="email" placeholder="Enter your email" value={email} onChange={e => setEmail(e.target.value)} required className="flex-1 bg-white text-gray-900 border-white/20 placeholder:text-gray-500" />
-            <Button type="submit" variant="secondary" className="bg-white text-orange-600 hover:bg-gray-100">
+            <Input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="flex-1 bg-white text-slate-900 border-slate-300 placeholder:text-slate-500"
+            />
+            <Button 
+              type="submit" 
+              className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white"
+            >
               Subscribe
             </Button>
           </form>
 
-          <div className="flex items-center justify-center gap-8 text-sm text-white/80">
+          <div className="flex items-center justify-center gap-8 text-sm text-slate-400">
             <div className="text-center">
               <div className="font-semibold text-white text-xl">5k+</div>
               <div>Subscribers</div>
@@ -49,5 +64,6 @@ export function Newsletter() {
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 }
