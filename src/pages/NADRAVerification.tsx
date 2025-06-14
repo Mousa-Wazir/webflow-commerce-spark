@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Shield, Upload, CheckCircle, Clock, AlertCircle } from 'lucide-react';
@@ -10,19 +9,27 @@ import { Shield, Upload, CheckCircle, Clock, AlertCircle } from 'lucide-react';
 const NADRAVerification = () => {
   const [cnicNumber, setCnicNumber] = useState('');
   const [verificationStatus, setVerificationStatus] = useState<'none' | 'pending' | 'verified' | 'failed'>('none');
-  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+  const [cnicFront, setCnicFront] = useState<File | null>(null);
+  const [cnicBack, setCnicBack] = useState<File | null>(null);
+  const [selfie, setSelfie] = useState<File | null>(null);
 
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>, type: 'front' | 'back' | 'selfie') => {
     const file = event.target.files?.[0];
     if (file) {
-      setUploadedFile(file);
+      if (type === 'front') setCnicFront(file);
+      else if (type === 'back') setCnicBack(file);
+      else setSelfie(file);
     }
   };
 
   const handleVerification = () => {
-    if (cnicNumber.length === 15 || uploadedFile) {
+    if (
+      cnicNumber.length === 15 &&
+      cnicFront &&
+      cnicBack &&
+      selfie
+    ) {
       setVerificationStatus('pending');
-      // Simulate verification process
       setTimeout(() => {
         setVerificationStatus('verified');
       }, 3000);
@@ -101,49 +108,108 @@ const NADRAVerification = () => {
                     <label className="block text-sm font-medium text-black mb-2">
                       CNIC Number
                     </label>
-                    <Input
+                    <input
                       type="text"
                       placeholder="12345-6789012-3"
                       value={cnicNumber}
                       onChange={(e) => setCnicNumber(e.target.value)}
-                      className="marketplace-input"
                       maxLength={15}
+                      className="marketplace-input w-full"
                     />
                     <p className="text-xs text-gray-500 mt-1">
                       Enter your 13-digit CNIC number with dashes
                     </p>
                   </div>
 
-                  {/* File Upload */}
+                  {/* CNIC Front Upload */}
                   <div>
                     <label className="block text-sm font-medium text-black mb-2">
-                      Upload CNIC Copy (Optional)
+                      CNIC Front Picture (User/Seller)
                     </label>
                     <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400 transition-colors">
                       <Upload className="h-8 w-8 text-gray-400 mx-auto mb-2" />
                       <p className="text-sm text-gray-600 mb-2">
                         Click to upload or drag and drop
                       </p>
-                      <p className="text-xs text-gray-500">
-                        PNG, JPG up to 10MB
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => handleFileUpload(e, 'front')}
+                        className="hidden"
+                        id="cnic-front-upload"
+                      />
+                      <label
+                        htmlFor="cnic-front-upload"
+                        className="inline-block mt-4 marketplace-button cursor-pointer"
+                      >
+                        Choose CNIC Front
+                      </label>
+                    </div>
+                    {cnicFront && (
+                      <p className="text-sm text-green-600 mt-2">
+                        File uploaded: {cnicFront.name}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* CNIC Back Upload */}
+                  <div>
+                    <label className="block text-sm font-medium text-black mb-2">
+                      CNIC Back Picture (User/Seller)
+                    </label>
+                    <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400 transition-colors">
+                      <Upload className="h-8 w-8 text-gray-400 mx-auto mb-2" />
+                      <p className="text-sm text-gray-600 mb-2">
+                        Click to upload or drag and drop
                       </p>
                       <input
                         type="file"
                         accept="image/*"
-                        onChange={handleFileUpload}
+                        onChange={(e) => handleFileUpload(e, 'back')}
                         className="hidden"
-                        id="cnic-upload"
+                        id="cnic-back-upload"
                       />
                       <label
-                        htmlFor="cnic-upload"
+                        htmlFor="cnic-back-upload"
                         className="inline-block mt-4 marketplace-button cursor-pointer"
                       >
-                        Choose File
+                        Choose CNIC Back
                       </label>
                     </div>
-                    {uploadedFile && (
+                    {cnicBack && (
                       <p className="text-sm text-green-600 mt-2">
-                        File uploaded: {uploadedFile.name}
+                        File uploaded: {cnicBack.name}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Selfie Upload */}
+                  <div>
+                    <label className="block text-sm font-medium text-black mb-2">
+                      Selfie Picture (User/Seller)
+                    </label>
+                    <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400 transition-colors">
+                      <Upload className="h-8 w-8 text-gray-400 mx-auto mb-2" />
+                      <p className="text-sm text-gray-600 mb-2">
+                        Click to upload or drag and drop
+                      </p>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => handleFileUpload(e, 'selfie')}
+                        className="hidden"
+                        id="selfie-upload"
+                      />
+                      <label
+                        htmlFor="selfie-upload"
+                        className="inline-block mt-4 marketplace-button cursor-pointer"
+                      >
+                        Choose Selfie
+                      </label>
+                    </div>
+                    {selfie && (
+                      <p className="text-sm text-green-600 mt-2">
+                        File uploaded: {selfie.name}
                       </p>
                     )}
                   </div>
@@ -151,7 +217,7 @@ const NADRAVerification = () => {
                   {/* Verification Button */}
                   <Button
                     onClick={handleVerification}
-                    disabled={!cnicNumber && !uploadedFile}
+                    disabled={!cnicNumber || !cnicFront || !cnicBack || !selfie}
                     className="marketplace-button w-full"
                   >
                     {verificationStatus === 'pending' ? 'Verifying...' : 'Start Verification'}
@@ -172,7 +238,7 @@ const NADRAVerification = () => {
                       </div>
                       <div>
                         <h3 className="font-medium text-black">Submit Information</h3>
-                        <p className="text-sm text-gray-600">Enter your CNIC number and upload documents</p>
+                        <p className="text-sm text-gray-600">Enter your CNIC number and upload CNIC front, CNIC back and selfie images</p>
                       </div>
                     </div>
                     <div className="flex gap-4">
@@ -181,7 +247,7 @@ const NADRAVerification = () => {
                       </div>
                       <div>
                         <h3 className="font-medium text-black">Identity Verification</h3>
-                        <p className="text-sm text-gray-600">We verify your identity through NADRA database</p>
+                        <p className="text-sm text-gray-600">We verify your identity through our secure process</p>
                       </div>
                     </div>
                     <div className="flex gap-4">

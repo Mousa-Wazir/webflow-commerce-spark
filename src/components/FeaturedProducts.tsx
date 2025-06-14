@@ -178,14 +178,22 @@ export function FeaturedProducts() {
           ))}
         </div>
         {/* View All Button */}
-        <div className="text-center">
+        <div className="text-center flex flex-col sm:flex-row justify-center gap-4">
           <Button
             variant="outline"
             size="lg"
             className="btn-outline hover:bg-[#222] hover:text-white hover:border-[#222] transition-all duration-200"
-            onClick={() => window.location.href="/products"}
+            onClick={() => window.location.href = "/products"}
           >
-            View All Products
+            Browse Products
+          </Button>
+          <Button
+            variant="outline"
+            size="lg"
+            className="btn-outline hover:bg-[#4CAF50] hover:text-white hover:border-[#4CAF50] transition-all duration-200"
+            onClick={() => window.location.href = "/nadra-verification"}
+          >
+            Identity
           </Button>
         </div>
       </div>
