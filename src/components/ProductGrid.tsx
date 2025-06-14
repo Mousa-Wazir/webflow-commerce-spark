@@ -1,8 +1,12 @@
 
+import { useNavigate } from "react-router-dom";
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Heart, ShoppingCart, Calendar, Shield } from 'lucide-react';
+import { Heart, ShoppingCart, Calendar } from 'lucide-react';
+import { useCartWishlist } from '@/store/CartWishlistContext';
+import { useState } from "react";
+import { toast } from "@/hooks/use-toast";
 
 const allProducts = [
   {
@@ -116,98 +120,100 @@ interface ProductGridProps {
 }
 
 export function ProductGrid({ selectedCategory }: ProductGridProps) {
-  const filteredProducts = selectedCategory === 'All Products' 
-    ? allProducts 
+  const filteredProducts = selectedCategory === 'All Products'
+    ? allProducts
     : allProducts.filter(product => product.category === selectedCategory);
+
+  const { addToCart, isInCart, wishlistToggle, isWishlisted } = useCartWishlist();
+  const navigate = useNavigate();
 
   return (
     <div className="space-y-6">
       {/* Results Header */}
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-semibold text-gray-900">
-          {selectedCategory}
-        </h2>
-        <p className="text-gray-600">
-          {filteredProducts.length} {filteredProducts.length === 1 ? 'product' : 'products'} found
-        </p>
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-2">
+        <h2 className="text-2xl font-semibold text-gray-900">{selectedCategory}</h2>
+        <p className="text-gray-600">{filteredProducts.length} {filteredProducts.length === 1 ? 'product' : 'products'} found</p>
       </div>
 
       {/* Product Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {filteredProducts.map((product) => (
-          <Card key={product.id} className="group overflow-hidden border-0 shadow-md hover:shadow-xl transition-all duration-300 bg-white">
-            {/* Product Image */}
-            <div className="relative aspect-square overflow-hidden">
-              <img 
+          <Card
+            key={product.id}
+            className="group overflow-hidden border-0 shadow-md hover:shadow-xl transition-all duration-300 bg-white relative"
+          >
+            {/* Product Image & Card Main Click Area */}
+            <div
+              className="relative aspect-square overflow-hidden cursor-pointer"
+              onClick={() => navigate(`/products/${product.id}`)}
+            >
+              <img
                 src={product.image}
                 alt={product.name}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
               />
-              
+
               {/* Badges */}
               <div className="absolute top-3 left-3 space-y-1">
                 {product.isNew && (
-                  <Badge className="bg-green-500 text-white text-xs">
-                    NEW
-                  </Badge>
+                  <Badge className="bg-green-500 text-white text-xs">NEW</Badge>
                 )}
                 {product.originalPrice && (
-                  <Badge className="bg-red-500 text-white text-xs">
-                    SALE
-                  </Badge>
+                  <Badge className="bg-red-500 text-white text-xs">SALE</Badge>
                 )}
                 {product.isRentable && (
-                  <Badge className="bg-blue-500 text-white text-xs">
-                    RENTABLE
-                  </Badge>
+                  <Badge className="bg-blue-500 text-white text-xs">RENTABLE</Badge>
                 )}
               </div>
-
               {/* Verification Badge */}
               {product.isVerified && (
                 <div className="absolute top-3 right-3">
-                  <Badge className="bg-green-600 text-white text-xs flex items-center gap-1">
-                    <Shield className="h-3 w-3" />
-                    VERIFIED
-                  </Badge>
+                  <Badge className="bg-green-600 text-white text-xs flex items-center gap-1">VERIFIED</Badge>
                 </div>
               )}
-
-              {/* Hover Actions */}
-              <div className="absolute top-3 right-3 space-y-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                {!product.isVerified && (
-                  <Button size="icon" variant="secondary" className="h-8 w-8 bg-white/90 hover:bg-white">
-                    <Heart className="h-4 w-4 text-gray-700" />
-                  </Button>
-                )}
-              </div>
-
-              {/* Action Buttons */}
-              <div className="absolute bottom-3 left-3 right-3 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 space-y-2">
-                <Button className="w-full bg-gray-900 hover:bg-gray-800 text-white">
-                  <ShoppingCart className="mr-2 h-4 w-4" />
-                  Buy Now
-                </Button>
-                {product.isRentable ? (
-                  <Button variant="outline" className="w-full bg-white/90 hover:bg-white border-gray-900 text-gray-900">
-                    <Calendar className="mr-2 h-4 w-4" />
-                    Rent (${product.rentalPrice}/day)
-                  </Button>
-                ) : (
-                  <Button variant="outline" disabled className="w-full bg-gray-100 text-gray-400 border-gray-300">
-                    Not for Rent
-                  </Button>
-                )}
-              </div>
             </div>
 
+            {/* Favorite/Wishlist Icon (top right, overlay, always visible) */}
+            <Button
+              size="icon"
+              variant="ghost"
+              onClick={(e) => {
+                e.stopPropagation();
+                wishlistToggle(product.id);
+                toast({
+                  title: isWishlisted(product.id)
+                    ? "Removed from Wishlist"
+                    : "Added to Wishlist",
+                  description: product.name,
+                });
+              }}
+              aria-label={isWishlisted(product.id) ? 'Remove from wishlist' : 'Add to wishlist'}
+              className={`absolute top-3 right-3 z-10 rounded-full bg-white/90 hover:bg-red-50 border ${isWishlisted(product.id) ? "ring-2 ring-red-500" : ""}`}
+            >
+              <Heart
+                className={`h-5 w-5 transition-all ${isWishlisted(product.id) ? "fill-red-600 text-red-600" : "text-gray-500"}`}
+                fill={isWishlisted(product.id) ? "#EF4444" : "none"}
+              />
+            </Button>
+
             {/* Product Info */}
-            <div className="p-4 space-y-3">
+            <div className="p-4 space-y-2 flex flex-col justify-between min-h-[160px]">
               <div>
-                <p className="text-sm text-gray-500 font-medium">{product.category}</p>
-                <h3 className="font-semibold text-lg text-gray-900 line-clamp-1">{product.name}</h3>
+                <button
+                  className="text-sm text-gray-500 font-medium hover:underline"
+                  onClick={() => navigate(`/products/${product.id}`)}
+                >
+                  {product.category}
+                </button>
+                <h3
+                  className="font-semibold text-lg text-gray-900 line-clamp-1 mt-1 mb-1 cursor-pointer hover:underline"
+                  onClick={() => navigate(`/products/${product.id}`)}
+                >
+                  {product.name}
+                </h3>
                 <p className="text-sm text-gray-600 line-clamp-2">{product.description}</p>
               </div>
+
               <div className="flex items-center gap-2">
                 <span className="font-bold text-lg text-gray-900">${product.price}</span>
                 {product.originalPrice && (
@@ -215,6 +221,67 @@ export function ProductGrid({ selectedCategory }: ProductGridProps) {
                 )}
                 {product.isRentable && (
                   <span className="text-sm text-blue-600">• ${product.rentalPrice}/day rent</span>
+                )}
+              </div>
+              {/* Card Buttons */}
+              <div className="flex flex-col sm:flex-row gap-2 mt-3">
+                <Button
+                  className="flex-1 btn-primary btn-animate font-semibold"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (!isInCart(product.id)) {
+                      addToCart(product.id);
+                      toast({
+                        title: "Added to cart",
+                        description: product.name,
+                      });
+                    } else {
+                      toast({
+                        title: "Product already in cart",
+                        description: product.name,
+                      });
+                    }
+                  }}
+                  disabled={isInCart(product.id)}
+                >
+                  <ShoppingCart className="mr-2 h-4 w-4" />
+                  {isInCart(product.id) ? "In Cart" : "Add to Cart"}
+                </Button>
+                <Button
+                  className="flex-1 btn-primary shadow-lg btn-animate"
+                  variant="default"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    // Quick "Buy Now": add to cart if not already, then go to cart/checkout for that item.
+                    if (!isInCart(product.id)) addToCart(product.id);
+                    navigate('/cart');
+                  }}
+                >
+                  Buy Now
+                </Button>
+                {product.isRentable ? (
+                  <Button
+                    variant="outline"
+                    className="flex-1 bg-white/90 hover:bg-white border-gray-900 text-gray-900"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toast({
+                        title: "Rent feature coming soon",
+                        description: product.name,
+                      });
+                    }}
+                  >
+                    <Calendar className="mr-2 h-4 w-4" />
+                    Rent (${product.rentalPrice}/day)
+                  </Button>
+                ) : (
+                  <Button
+                    variant="outline"
+                    disabled
+                    className="w-full bg-gray-100 text-gray-400 border-gray-300"
+                  >
+                    Not for Rent
+                  </Button>
                 )}
               </div>
             </div>
