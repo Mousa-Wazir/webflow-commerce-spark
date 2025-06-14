@@ -1,4 +1,3 @@
-
 import { useNavigate } from "react-router-dom";
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -136,15 +135,15 @@ export function ProductGrid({ selectedCategory }: ProductGridProps) {
       </div>
 
       {/* Product Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
         {filteredProducts.map((product) => (
           <Card
             key={product.id}
-            className="group overflow-hidden border-0 shadow-md hover:shadow-xl transition-all duration-300 bg-white relative"
+            className="group overflow-hidden border-0 shadow-md hover:shadow-xl transition-all duration-300 bg-white relative rounded-xl min-h-[390px] flex flex-col"
           >
             {/* Product Image & Card Main Click Area */}
             <div
-              className="relative aspect-square overflow-hidden cursor-pointer"
+              className="relative aspect-square overflow-hidden cursor-pointer sm:rounded-t-xl"
               onClick={() => navigate(`/products/${product.id}`)}
             >
               <img
@@ -154,26 +153,26 @@ export function ProductGrid({ selectedCategory }: ProductGridProps) {
               />
 
               {/* Badges */}
-              <div className="absolute top-3 left-3 space-y-1">
+              <div className="absolute top-2 left-2 space-y-1">
                 {product.isNew && (
-                  <Badge className="bg-green-500 text-white text-xs">NEW</Badge>
+                  <Badge className="bg-green-500 text-white text-xs px-2 py-0.5 rounded-full">NEW</Badge>
                 )}
                 {product.originalPrice && (
-                  <Badge className="bg-red-500 text-white text-xs">SALE</Badge>
+                  <Badge className="bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">SALE</Badge>
                 )}
                 {product.isRentable && (
-                  <Badge className="bg-blue-500 text-white text-xs">RENTABLE</Badge>
+                  <Badge className="bg-blue-500 text-white text-xs px-2 py-0.5 rounded-full">RENTABLE</Badge>
                 )}
               </div>
               {/* Verification Badge */}
               {product.isVerified && (
-                <div className="absolute top-3 right-3">
-                  <Badge className="bg-green-600 text-white text-xs flex items-center gap-1">VERIFIED</Badge>
+                <div className="absolute top-2 right-2">
+                  <Badge className="bg-green-600 text-white text-xs flex items-center gap-1 px-2 py-0.5 rounded-full">VERIFIED</Badge>
                 </div>
               )}
             </div>
 
-            {/* Favorite/Wishlist Icon (top right, overlay, always visible) */}
+            {/* Favorite/Wishlist Icon */}
             <Button
               size="icon"
               variant="ghost"
@@ -188,7 +187,7 @@ export function ProductGrid({ selectedCategory }: ProductGridProps) {
                 });
               }}
               aria-label={isWishlisted(product.id) ? 'Remove from wishlist' : 'Add to wishlist'}
-              className={`absolute top-3 right-3 z-10 rounded-full bg-white/90 hover:bg-red-50 border ${isWishlisted(product.id) ? "ring-2 ring-red-500" : ""}`}
+              className={`absolute top-2 right-2 z-10 rounded-full bg-white/90 hover:bg-red-50 border shadow ${isWishlisted(product.id) ? "ring-2 ring-red-500" : ""}`}
             >
               <Heart
                 className={`h-5 w-5 transition-all ${isWishlisted(product.id) ? "fill-red-600 text-red-600" : "text-gray-500"}`}
@@ -197,36 +196,36 @@ export function ProductGrid({ selectedCategory }: ProductGridProps) {
             </Button>
 
             {/* Product Info */}
-            <div className="p-4 space-y-2 flex flex-col justify-between min-h-[160px]">
+            <div className="flex flex-col justify-between flex-1 p-3 md:p-4 space-y-2 min-h-[160px]">
               <div>
                 <button
-                  className="text-sm text-gray-500 font-medium hover:underline"
+                  className="text-xs sm:text-sm text-gray-500 font-medium hover:underline"
                   onClick={() => navigate(`/products/${product.id}`)}
                 >
                   {product.category}
                 </button>
                 <h3
-                  className="font-semibold text-lg text-gray-900 line-clamp-1 mt-1 mb-1 cursor-pointer hover:underline"
+                  className="font-semibold text-base md:text-lg text-gray-900 line-clamp-1 mt-1 mb-1 cursor-pointer hover:underline"
                   onClick={() => navigate(`/products/${product.id}`)}
                 >
                   {product.name}
                 </h3>
-                <p className="text-sm text-gray-600 line-clamp-2">{product.description}</p>
+                <p className="text-xs sm:text-sm text-gray-600 line-clamp-2">{product.description}</p>
               </div>
 
-              <div className="flex items-center gap-2">
-                <span className="font-bold text-lg text-gray-900">${product.price}</span>
+              <div className="flex items-center gap-2 text-sm md:text-base">
+                <span className="font-bold text-gray-900">${product.price}</span>
                 {product.originalPrice && (
-                  <span className="text-gray-500 line-through text-sm">${product.originalPrice}</span>
+                  <span className="text-gray-500 line-through">${product.originalPrice}</span>
                 )}
                 {product.isRentable && (
-                  <span className="text-sm text-blue-600">• ${product.rentalPrice}/day rent</span>
+                  <span className="text-xs md:text-sm text-blue-600">• ${product.rentalPrice}/day rent</span>
                 )}
               </div>
               {/* Card Buttons */}
-              <div className="flex flex-col sm:flex-row gap-2 mt-3">
+              <div className="flex flex-col sm:flex-row gap-2 mt-3 w-full">
                 <Button
-                  className="flex-1 btn-primary btn-animate font-semibold"
+                  className="w-full btn-primary btn-animate font-semibold text-xs sm:text-sm px-3 py-2 sm:px-4 sm:py-2"
                   onClick={(e) => {
                     e.stopPropagation();
                     if (!isInCart(product.id)) {
@@ -243,26 +242,27 @@ export function ProductGrid({ selectedCategory }: ProductGridProps) {
                     }
                   }}
                   disabled={isInCart(product.id)}
+                  size="sm"
                 >
                   <ShoppingCart className="mr-2 h-4 w-4" />
                   {isInCart(product.id) ? "In Cart" : "Add to Cart"}
                 </Button>
                 <Button
-                  className="flex-1 btn-primary shadow-lg btn-animate"
+                  className="w-full btn-primary shadow-lg btn-animate text-xs sm:text-sm px-3 py-2 sm:px-4 sm:py-2"
                   variant="default"
                   onClick={(e) => {
                     e.stopPropagation();
-                    // Quick "Buy Now": add to cart if not already, then go to cart/checkout for that item.
                     if (!isInCart(product.id)) addToCart(product.id);
                     navigate('/cart');
                   }}
+                  size="sm"
                 >
                   Buy Now
                 </Button>
                 {product.isRentable ? (
                   <Button
                     variant="outline"
-                    className="flex-1 bg-white/90 hover:bg-white border-gray-900 text-gray-900"
+                    className="w-full bg-white/90 hover:bg-white border-gray-900 text-gray-900 text-xs sm:text-sm px-3 py-2 sm:px-4 sm:py-2"
                     onClick={(e) => {
                       e.stopPropagation();
                       toast({
@@ -270,6 +270,7 @@ export function ProductGrid({ selectedCategory }: ProductGridProps) {
                         description: product.name,
                       });
                     }}
+                    size="sm"
                   >
                     <Calendar className="mr-2 h-4 w-4" />
                     Rent (${product.rentalPrice}/day)
@@ -278,7 +279,8 @@ export function ProductGrid({ selectedCategory }: ProductGridProps) {
                   <Button
                     variant="outline"
                     disabled
-                    className="w-full bg-gray-100 text-gray-400 border-gray-300"
+                    className="w-full bg-gray-100 text-gray-400 border-gray-300 text-xs sm:text-sm px-3 py-2 sm:px-4 sm:py-2"
+                    size="sm"
                   >
                     Not for Rent
                   </Button>
