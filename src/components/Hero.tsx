@@ -7,29 +7,29 @@ export function Hero() {
   const navigate = useNavigate();
 
   return (
-    <section className="relative min-h-[70vh] flex items-center bg-gradient-to-tr from-[#f8f8f8] via-[#fafafa] to-white">
+    <section className="relative min-h-[70vh] flex items-center bg-[#44C774]">
       {/* Landscape Hero Image */}
       <div className="absolute inset-0 w-full h-full z-0">
         <img
           src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1440&h=450&fit=crop"
           alt="Landscape hero for Localena categories"
-          className="w-full h-[450px] object-cover"
+          className="w-full h-[450px] object-cover mix-blend-multiply"
           style={{ objectPosition: "center" }}
         />
-        {/* Modern geometric overlay for soft fade */}
+        {/* Overlay for stronger green tint and white text legibility */}
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{ background: "linear-gradient(to top, rgba(255,255,255,0.92), rgba(255,255,255,0.40) 80%, transparent)" }}
+          style={{ background: "linear-gradient(to top, rgba(68,199,116,0.98), rgba(68,199,116,0.88) 80%, rgba(68,199,116,0.7))" }}
         />
       </div>
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center space-y-8 py-12 md:py-28 animate-fade-in">
           <div className="space-y-6">
-            <h1 className="h1 leading-tight text-black">
-              Unlock <span className="text-[#222222]">Local Rentals</span><br />
-              <span className="bg-gradient-to-r from-[#333] to-[#222] bg-clip-text text-transparent">Effortlessly & Securely.</span>
+            <h1 className="h1 leading-tight text-white font-bold">
+              Unlock <span className="text-white font-bold">Local Rentals</span><br />
+              <span className="bg-gradient-to-r from-white to-[#dcffe0] bg-clip-text text-transparent font-bold">Effortlessly & Securely.</span>
             </h1>
-            <p className="subtitle max-w-2xl mx-auto leading-relaxed">
+            <p className="subtitle max-w-2xl mx-auto leading-relaxed text-white font-semibold">
               Find and rent unique products from skilled creators in your community.<br className="hidden md:inline" /> Modern, trusted, and built for the way you live.
             </p>
           </div>
@@ -45,27 +45,27 @@ export function Hero() {
             <Button
               variant="outline"
               size="lg"
-              className="btn-outline font-semibold btn-animate flex items-center gap-2"
+              className="btn-outline font-semibold btn-animate flex items-center gap-2 bg-white/90 text-[#44C774] border-white"
               onClick={() => navigate('/nadra-verification')}
             >
               <Shield className="h-5 w-5" />
               Identity Verification
             </Button>
           </div>
-          <div className="flex items-center justify-center gap-12 text-sm text-[#555] pt-8">
+          <div className="flex items-center justify-center gap-12 text-sm text-white pt-8">
             <div className="text-center">
-              <div className="font-bold text-black text-2xl">1000+</div>
-              <div>Products</div>
+              <div className="font-bold text-white text-2xl">1000+</div>
+              <div className="font-semibold">Products</div>
             </div>
             <div className="text-center">
-              <div className="font-bold text-black text-2xl">500+</div>
-              <div>Verified Vendors</div>
+              <div className="font-bold text-white text-2xl">500+</div>
+              <div className="font-semibold">Verified Vendors</div>
             </div>
             <div className="text-center">
-              <div className="font-bold text-[#4CAF50] text-2xl flex items-center justify-center gap-1">
+              <div className="font-bold text-white text-2xl flex items-center justify-center gap-1">
                 <Shield className="h-5 w-5" /> Identity Verified
               </div>
-              <div>Secure Rentals</div>
+              <div className="font-semibold">Secure Rentals</div>
             </div>
           </div>
         </div>
@@ -73,4 +73,3 @@ export function Hero() {
     </section>
   );
 }
-
