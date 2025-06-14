@@ -7,32 +7,37 @@ export function Hero() {
   const navigate = useNavigate();
 
   return (
-    <section className="relative min-h-[70vh] flex items-center bg-[#212121]">
-      {/* Landscape Hero Image - Used category wall art product */}
+    <section className="relative min-h-[70vh] flex items-center bg-black">
+      {/* Landscape Hero Image - Used Handicrafts category (Ceramic Pottery Collection) */}
       <div className="absolute inset-0 w-full h-full z-0">
         <img
-          src="https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=1440&h=450&fit=crop"
-          alt="Handwoven wall art - Home Decor category"
-          className="w-full h-[450px] object-cover mix-blend-luminosity"
+          src="https://images.unsplash.com/photo-1472396961693-142e6e269027?w=1440&h=500&fit=crop"
+          alt="Ceramic Pottery Collection - Handicrafts category"
+          className="w-full h-[500px] object-cover"
           style={{ objectPosition: "center" }}
         />
-        {/* Overlay for a strong gray-black tint and white text legibility */}
+        {/* Overlay for legibility: soft dark at bottom, transparent top */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: "linear-gradient(to top, rgba(33,33,33,0.97), rgba(40,40,40,0.85) 75%, rgba(66,66,66,0.6) 100%)"
+            background: 
+              "linear-gradient(to top, rgba(20,20,20,0.78) 65%, rgba(30,30,30,0.15) 100%, transparent)"
           }}
         />
       </div>
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center space-y-8 py-12 md:py-28 animate-fade-in">
           <div className="space-y-6">
-            <h1 className="h1 leading-tight text-white font-extrabold">
-              Unlock <span className="text-white font-extrabold">Local Rentals</span><br />
-              <span className="bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent font-extrabold">Effortlessly & Securely.</span>
+            <h1 className="h1 leading-tight text-white font-extrabold drop-shadow">
+              Unlock <span className="text-white font-extrabold">Local Rentals</span>
+              <br />
+              <span className="bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent font-extrabold">
+                Effortlessly & Securely.
+              </span>
             </h1>
-            <p className="subtitle max-w-2xl mx-auto leading-relaxed text-white font-semibold">
-              Find and rent unique products from skilled creators in your community.<br className="hidden md:inline" /> Modern, trusted, and built for the way you live.
+            <p className="subtitle max-w-2xl mx-auto leading-relaxed text-white font-semibold drop-shadow">
+              Find and rent unique products from skilled creators in your community.
+              <br className="hidden md:inline" /> Modern, trusted, and built for the way you live.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -74,4 +79,3 @@ export function Hero() {
     </section>
   );
 }
-
