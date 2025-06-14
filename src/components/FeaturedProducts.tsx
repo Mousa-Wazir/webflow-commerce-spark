@@ -96,9 +96,9 @@ export function FeaturedProducts() {
             variant="outline"
             size="lg"
             className="btn-outline hover:bg-[#4CAF50] hover:text-white hover:border-[#4CAF50] transition-all duration-200"
-            onClick={() => window.location.href = "/nadra-verification"}
+            onClick={() => window.location.href = "/about"}
           >
-            Identity
+            Learn About Us
           </Button>
         </div>
       </div>
