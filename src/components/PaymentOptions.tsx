@@ -9,7 +9,7 @@ const paymentMethods = [
     key: "jazzcash",
     label: "JazzCash",
     icon: (
-      <span className="inline-flex items-center justify-center w-10 h-10 rounded-full shadow bg-[#fdc032] text-[#863286] text-lg font-bold border-2 border-[#863286] animate-in fade-in">
+      <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[#222] text-white text-lg font-bold border-2 border-[#555] shadow animate-in fade-in">
         JC
       </span>
     ),
@@ -18,7 +18,7 @@ const paymentMethods = [
     key: "easypaisa",
     label: "Easypaisa",
     icon: (
-      <span className="inline-flex items-center justify-center w-10 h-10 rounded-full shadow bg-[#46c95c] text-white text-lg font-bold border-2 border-[#28613c] animate-in fade-in">
+      <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[#333] text-white text-lg font-bold border-2 border-[#333] shadow animate-in fade-in">
         EP
       </span>
     ),
@@ -27,7 +27,7 @@ const paymentMethods = [
     key: "card",
     label: "Credit Card",
     icon: (
-      <span className="inline-flex items-center justify-center w-10 h-10 rounded-full shadow bg-[#5e5ae0] text-white text-lg font-bold border-2 border-[#3736a3] animate-in fade-in">
+      <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[#111] text-white text-lg font-bold border-2 border-[#222] shadow animate-in fade-in">
         <svg width="28" height="16" fill="none">
           <rect width="28" height="16" rx="4" fill="currentColor"/>
           <rect x="5" y="12" width="7" height="2" rx="0.5" fill="#fff"/>
@@ -72,37 +72,43 @@ export function PaymentOptions({ amount }: { amount: number }) {
         <div className="flex flex-col items-center justify-center">
           <span className="uppercase tracking-wide text-xs text-gray-500">Amount to pay</span>
           <div className="flex items-center justify-center mt-1">
-            <span className="inline-block px-4 py-2 bg-green-100 text-green-700 text-2xl font-extrabold rounded-lg shadow-inner animate-scale-in">PKR {amount}</span>
+            <span className="inline-block px-4 py-2 bg-gray-100 text-black text-2xl font-extrabold rounded-lg shadow-inner animate-scale-in border border-gray-300">
+              PKR {amount}
+            </span>
           </div>
         </div>
       </div>
       <div>
         <div className="text-[15px] font-medium pb-2 text-gray-800 text-center">Select Payment Method</div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {paymentMethods.map((method) => (
-            <label
-              key={method.key}
-              className={`flex flex-col items-center gap-2 rounded-2xl px-3 py-4 shadow-md cursor-pointer border-2 transition 
-                ${
-                  selected === method.key
-                    ? "border-green-500 ring-2 ring-green-200 bg-green-50 scale-105 animate-scale-in"
-                    : "border-gray-200 bg-white hover:bg-gray-50 hover:scale-105"
-                }
-              `}
-              style={{ transition: 'all 0.18s cubic-bezier(.4,0,.2,1)' }}
-            >
-              <input
-                type="radio"
-                name="paymentMethod"
-                value={method.key}
-                checked={selected === method.key}
-                onChange={() => setSelected(method.key)}
-                className="hidden"
-              />
-              {method.icon}
-              <span className="font-semibold text-sm mt-1 tracking-wide">{method.label}</span>
-            </label>
-          ))}
+          {paymentMethods.map((method) => {
+            const isSelected = selected === method.key;
+            return (
+              <label
+                key={method.key}
+                className={`
+                  flex flex-col items-center gap-2 rounded-2xl px-3 py-4 shadow-md cursor-pointer border-2 transition
+                  ${isSelected
+                    ? "border-black bg-gray-100 scale-105 ring-2 ring-gray-400 shadow-lg"
+                    : "border-gray-300 bg-white hover:bg-gray-100 hover:shadow-lg hover:border-[#222] hover:scale-105"}
+                `}
+                style={{ transition: 'all 0.18s cubic-bezier(.4,0,.2,1)' }}
+              >
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  value={method.key}
+                  checked={selected === method.key}
+                  onChange={() => setSelected(method.key)}
+                  className="hidden"
+                />
+                {method.icon}
+                <span className="font-semibold text-sm mt-1 tracking-wide">
+                  {method.label}
+                </span>
+              </label>
+            );
+          })}
         </div>
       </div>
       <div className="mt-3 flex flex-col gap-1">
@@ -128,4 +134,3 @@ export function PaymentOptions({ amount }: { amount: number }) {
     </form>
   );
 }
-
