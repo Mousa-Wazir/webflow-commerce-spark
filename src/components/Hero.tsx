@@ -8,11 +8,11 @@ export function Hero() {
 
   return (
     <section className="relative min-h-[70vh] flex items-center bg-[#44C774]">
-      {/* Landscape Hero Image */}
+      {/* Landscape Hero Image - switched to previous version, replace src if you want a different one */}
       <div className="absolute inset-0 w-full h-full z-0">
         <img
-          src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1440&h=450&fit=crop"
-          alt="Landscape hero for Localena categories"
+          src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1440&h=450&fit=crop" 
+          alt="Hero showing rental categories"
           className="w-full h-[450px] object-cover mix-blend-multiply"
           style={{ objectPosition: "center" }}
         />
@@ -43,9 +43,9 @@ export function Hero() {
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Button>
             <Button
-              variant="outline"
               size="lg"
-              className="btn-outline font-semibold btn-animate flex items-center gap-2 bg-white/90 text-[#44C774] border-white"
+              className="bg-[#266a41] hover:bg-[#1c5131] text-white font-semibold btn-animate flex items-center gap-2 border-none shadow-lg"
+              // distinct green background!
               onClick={() => navigate('/nadra-verification')}
             >
               <Shield className="h-5 w-5" />
@@ -73,3 +73,4 @@ export function Hero() {
     </section>
   );
 }
+
