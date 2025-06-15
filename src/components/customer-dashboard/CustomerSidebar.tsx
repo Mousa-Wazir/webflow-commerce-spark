@@ -12,8 +12,14 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { Package, Heart, Star, MessageCircle, User } from "lucide-react";
-import { useNavigate, useLocation } from "react-router-dom";
 import React from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+
+// Avatar UI
+const userInfo = {
+  name: "Ayesha",
+  avatarUrl: "https://randomuser.me/api/portraits/women/46.jpg",
+};
 
 const items = [
   { label: "My Orders", icon: Package, href: "/orders" },
@@ -29,10 +35,28 @@ export function CustomerSidebar() {
   const { isMobile } = useSidebar();
 
   return (
-    <Sidebar className="z-40 min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-700 w-[75px] sm:w-56 shadow-xl ">
+    <Sidebar className="z-40 min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-700 w-[75px] sm:w-56 shadow-xl flex flex-col">
       <SidebarContent>
+        {/* User avatar and name at the top */}
+        <div className="flex items-center gap-3 px-4 py-4 mt-2">
+          <img
+            src={userInfo.avatarUrl}
+            alt={userInfo.name}
+            className="w-10 h-10 rounded-full border-2 border-indigo-400 object-cover shadow"
+          />
+          <span
+            className={
+              isMobile
+                ? "text-base font-semibold text-white"
+                : "hidden sm:block text-base font-semibold text-white"
+            }
+            style={{ lineHeight: "1" }}
+          >
+            {userInfo.name}
+          </span>
+        </div>
         <SidebarGroup>
-          <SidebarGroupLabel className="text-white text-lg font-bold mt-4 mb-2 pl-6 hidden sm:block tracking-wide drop-shadow-lg">
+          <SidebarGroupLabel className="text-white text-lg font-bold mt-3 mb-2 pl-6 hidden sm:block tracking-wide drop-shadow-lg">
             Localena
           </SidebarGroupLabel>
           <SidebarGroupContent>
@@ -54,7 +78,6 @@ export function CustomerSidebar() {
                       <item.icon size={22} className="mr-0 sm:mr-2" />
                       <span
                         className={
-                          // Agar mobile hai to always show, warna sirf sm aur above pe visible
                           isMobile
                             ? "inline"
                             : "hidden sm:inline"
