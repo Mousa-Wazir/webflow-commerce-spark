@@ -222,11 +222,16 @@ export function ProductGrid({ selectedCategory }: ProductGridProps) {
                   <span className="text-xs md:text-sm text-blue-600">• ${product.rentalPrice}/day rent</span>
                 )}
               </div>
-              {/* Card Buttons - Responsive & Attractive */}
-              <div className="flex flex-col gap-2 mt-4 w-full sm:flex-row">
+              {/* Responsive Card Buttons */}
+              <div className="flex flex-col gap-2 mt-4 w-full sm:flex-row sm:gap-3 xl:gap-4">
                 {/* Add to Cart button */}
                 <Button
-                  className="w-full btn-primary btn-animate font-semibold text-xs sm:text-sm px-4 py-3 sm:px-5 sm:py-3 rounded-xl shadow-lg border-2 border-transparent hover:border-gray-900 active:scale-95 tracking-wide transition-all duration-200 bg-gradient-to-r from-[#2B72FF] to-[#00C6FF] hover:from-[#005bea] hover:to-[#00c6ff] focus:outline-none focus:ring focus:ring-blue-200"
+                  className="w-full font-semibold text-xs sm:text-sm px-4 py-3 sm:px-5 sm:py-3 rounded-xl
+                  transition-all duration-200 
+                  bg-primary text-primary-foreground shadow-lg border-2 border-transparent
+                  hover:bg-primary/90 hover:border-primary active:scale-95
+                  focus:outline-none focus:ring-2 focus:ring-primary/30
+                  "
                   onClick={(e) => {
                     e.stopPropagation();
                     if (!isInCart(product.id)) {
@@ -250,7 +255,12 @@ export function ProductGrid({ selectedCategory }: ProductGridProps) {
                 </Button>
                 {/* Buy Now button */}
                 <Button
-                  className="w-full btn-animate text-xs sm:text-sm px-4 py-3 sm:px-5 sm:py-3 rounded-xl shadow-lg border-2 border-transparent transition-all duration-200 bg-gradient-to-r from-[#f7971e] to-[#ffd200] hover:from-[#f7971e] hover:to-[#ff8800] focus:outline-none focus:ring focus:ring-yellow-200 font-semibold"
+                  className="w-full font-semibold text-xs sm:text-sm px-4 py-3 sm:px-5 sm:py-3 rounded-xl
+                  transition-all duration-200 
+                  bg-yellow-400 text-black shadow-lg border-2 border-transparent
+                  hover:bg-yellow-500 hover:border-yellow-600 active:scale-95
+                  focus:outline-none focus:ring-2 focus:ring-yellow-200
+                  "
                   variant="default"
                   onClick={(e) => {
                     e.stopPropagation();
@@ -268,7 +278,12 @@ export function ProductGrid({ selectedCategory }: ProductGridProps) {
                 {product.isRentable ? (
                   <Button
                     variant="outline"
-                    className="w-full bg-white hover:bg-blue-50 border-2 border-blue-500 text-blue-700 font-semibold text-xs sm:text-sm px-4 py-3 sm:px-5 sm:py-3 rounded-xl shadow btn-animate transition-all duration-200 hover:border-blue-700 active:scale-95"
+                    className="w-full font-semibold text-xs sm:text-sm px-4 py-3 sm:px-5 sm:py-3 rounded-xl
+                    transition-all duration-200
+                    bg-blue-500 text-white border-blue-600 shadow
+                    hover:bg-blue-600 hover:border-blue-700 active:scale-95
+                    focus:outline-none focus:ring-2 focus:ring-blue-200
+                    "
                     onClick={(e) => {
                       e.stopPropagation();
                       toast({
