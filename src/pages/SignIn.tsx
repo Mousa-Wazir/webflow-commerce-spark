@@ -1,6 +1,5 @@
-
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { Button } from '@/components/ui/button';
@@ -20,10 +19,15 @@ const SignIn = () => {
     password: ''
   });
 
+  const navigate = useNavigate();
+
   const handleCustomerSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle customer sign in
     console.log('Customer sign in:', customerData);
+
+    // After sign in, redirect to customer dashboard
+    navigate('/dashboard');
   };
 
   const handleSellerSubmit = (e: React.FormEvent) => {
