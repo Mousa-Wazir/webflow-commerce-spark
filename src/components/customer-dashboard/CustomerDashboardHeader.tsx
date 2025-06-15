@@ -1,6 +1,5 @@
-
 import { useNavigate, useLocation } from "react-router-dom";
-import { Heart, Search, LogOut } from "lucide-react";
+import { Heart, Search, LogOut, ShoppingCart } from "lucide-react";
 import { useCartWishlist } from "@/store/CartWishlistContext";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -68,16 +67,16 @@ export function CustomerDashboardHeader() {
 
         {/* Icons */}
         <div className="flex items-center gap-2 relative">
-          {/* Cart - Attractive style */}
+          {/* Cart - Outlined style (matches login/main header) */}
           <Button
             variant="ghost"
             size="icon"
-            className="relative bg-green-500 hover:bg-green-600 active:bg-green-700 shadow-lg hover:scale-110 active:scale-95 transition-all duration-200 border-2 border-white flex items-center justify-center"
+            className="text-gray-700 hover:bg-gray-200 relative"
             onClick={() => navigate("/cart")}
             aria-label="Cart"
             style={{ minWidth: 44, minHeight: 44 }}
           >
-            <Search className="h-5 w-5 text-white drop-shadow-lg" />
+            <ShoppingCart className="h-5 w-5" />
             {cart.length > 0 && (
               <span className="absolute -top-1 -right-1 bg-green-600 text-white text-xs font-bold px-2 py-0.5 rounded-full border border-white shadow">
                 {cart.length}
