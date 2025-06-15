@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -6,6 +5,7 @@ import { Star, Store, ShoppingBag } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { CustomerDashboardShell } from "@/components/customer-dashboard/CustomerDashboardShell";
 import { CustomerDashboardHeader } from "@/components/customer-dashboard/CustomerDashboardHeader";
+import { ChatSection } from "@/components/ChatSection";
 
 type ReviewDetail = {
   id: number;
@@ -151,6 +151,13 @@ export default function Reviews() {
                 </div>
               </CardContent>
             </Card>
+            {/* --- Chat Section (Mockup) --- */}
+            <ChatSection
+              storeName={review.store.name}
+              storeLogo={review.store.logo}
+              productTitle={review.product.name}
+              productImage={review.product.image}
+            />
           </div>
         </div>
       </CustomerDashboardShell>
