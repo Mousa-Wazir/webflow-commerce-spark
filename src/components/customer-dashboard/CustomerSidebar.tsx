@@ -10,13 +10,11 @@ import {
   SidebarMenuItem,
   SidebarFooter,
 } from "@/components/ui/sidebar";
-import { Home, ShoppingBag, Package, Heart, Star, MessageCircle, User } from "lucide-react";
+import { Package, Heart, Star, MessageCircle, User } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import React from "react";
 
 const items = [
-  { label: "Home", icon: Home, href: "/dashboard" },
-  { label: "Products", icon: ShoppingBag, href: "/products" },
   { label: "My Orders", icon: Package, href: "/orders" },
   { label: "Wishlist", icon: Heart, href: "/wishlist" },
   { label: "Reviews", icon: Star, href: "/reviews" },
@@ -29,10 +27,10 @@ export function CustomerSidebar() {
   const location = useLocation();
 
   return (
-    <Sidebar className="z-40 min-h-screen bg-gray-900 w-[75px] sm:w-56">
+    <Sidebar className="z-40 min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-700 w-[75px] sm:w-56 shadow-xl ">
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="text-white text-lg font-bold mt-4 mb-2 pl-6 hidden sm:block">
+          <SidebarGroupLabel className="text-white text-lg font-bold mt-4 mb-2 pl-6 hidden sm:block tracking-wide drop-shadow-lg">
             Localena
           </SidebarGroupLabel>
           <SidebarGroupContent>
@@ -42,9 +40,11 @@ export function CustomerSidebar() {
                   <SidebarMenuButton
                     asChild
                     className={`flex items-center gap-3 w-full px-4 py-3 rounded-xl my-1 text-sm font-medium transition
-                    ${location.pathname === item.href
-                      ? "bg-gray-800 text-white"
-                      : "text-gray-300 hover:bg-gray-800 hover:text-white"}
+                    ${
+                      location.pathname === item.href
+                        ? "bg-gradient-to-r from-indigo-600 via-indigo-700 to-indigo-900 text-white shadow-lg"
+                        : "text-gray-300 hover:bg-gradient-to-r hover:from-gray-700 hover:via-gray-800 hover:to-gray-900 hover:text-white"
+                    }
                     `}
                     onClick={() => navigate(item.href)}
                   >
@@ -58,8 +58,8 @@ export function CustomerSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-        <SidebarFooter className="absolute bottom-0 left-0 w-full p-4 sm:pl-6 text-gray-500">
-          <span className="text-xs">© {new Date().getFullYear()} Localena</span>
+        <SidebarFooter className="absolute bottom-0 left-0 w-full p-4 sm:pl-6 text-gray-400">
+          <span className="text-xs font-semibold tracking-wide">© {new Date().getFullYear()} Localena</span>
         </SidebarFooter>
       </SidebarContent>
     </Sidebar>
