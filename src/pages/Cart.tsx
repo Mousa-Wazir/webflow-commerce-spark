@@ -88,11 +88,11 @@ export default function Cart() {
                       <Button
                         size="icon"
                         variant="ghost"
-                        className="absolute top-3 right-3 rounded-full bg-white/85 hover:bg-green-100 shadow"
+                        className="absolute top-3 right-3 rounded-full bg-green-500 hover:bg-green-600 active:bg-green-700 shadow-lg hover:scale-110 active:scale-95 transition-all duration-200 border-2 border-white flex items-center justify-center"
                         aria-label="Product in cart"
                         disabled
                       >
-                        <ShoppingCart className="text-green-500" />
+                        <ShoppingCart className="text-white w-7 h-7 drop-shadow-lg" />
                       </Button>
                     </div>
                     <div className="p-5 flex flex-col gap-2">
