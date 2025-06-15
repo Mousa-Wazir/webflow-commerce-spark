@@ -139,7 +139,7 @@ export function ProductGrid({ selectedCategory }: ProductGridProps) {
         {filteredProducts.map((product) => (
           <Card
             key={product.id}
-            className="group overflow-hidden border-0 shadow-md hover:shadow-xl transition-all duration-300 bg-white relative rounded-xl min-h-[390px] flex flex-col"
+            className="group overflow-hidden border-0 shadow-md hover:shadow-xl transition-all duration-300 bg-white relative rounded-2xl min-h-[410px] flex flex-col"
           >
             {/* Product Image & Card Main Click Area */}
             <div
@@ -222,10 +222,11 @@ export function ProductGrid({ selectedCategory }: ProductGridProps) {
                   <span className="text-xs md:text-sm text-blue-600">• ${product.rentalPrice}/day rent</span>
                 )}
               </div>
-              {/* Card Buttons */}
-              <div className="flex flex-col sm:flex-row gap-2 mt-3 w-full">
+              {/* Card Buttons - Responsive & Attractive */}
+              <div className="flex flex-col gap-2 mt-4 w-full sm:flex-row">
+                {/* Add to Cart button */}
                 <Button
-                  className="w-full btn-primary btn-animate font-semibold text-xs sm:text-sm px-3 py-2 sm:px-4 sm:py-2"
+                  className="w-full btn-primary btn-animate font-semibold text-xs sm:text-sm px-4 py-3 sm:px-5 sm:py-3 rounded-xl shadow-lg border-2 border-transparent hover:border-gray-900 active:scale-95 tracking-wide transition-all duration-200 bg-gradient-to-r from-[#2B72FF] to-[#00C6FF] hover:from-[#005bea] hover:to-[#00c6ff] focus:outline-none focus:ring focus:ring-blue-200"
                   onClick={(e) => {
                     e.stopPropagation();
                     if (!isInCart(product.id)) {
@@ -244,11 +245,12 @@ export function ProductGrid({ selectedCategory }: ProductGridProps) {
                   disabled={isInCart(product.id)}
                   size="sm"
                 >
-                  <ShoppingCart className="mr-2 h-4 w-4" />
+                  <ShoppingCart className="mr-2 h-5 w-5" />
                   {isInCart(product.id) ? "In Cart" : "Add to Cart"}
                 </Button>
+                {/* Buy Now button */}
                 <Button
-                  className="w-full btn-primary shadow-lg btn-animate text-xs sm:text-sm px-3 py-2 sm:px-4 sm:py-2"
+                  className="w-full btn-animate text-xs sm:text-sm px-4 py-3 sm:px-5 sm:py-3 rounded-xl shadow-lg border-2 border-transparent transition-all duration-200 bg-gradient-to-r from-[#f7971e] to-[#ffd200] hover:from-[#f7971e] hover:to-[#ff8800] focus:outline-none focus:ring focus:ring-yellow-200 font-semibold"
                   variant="default"
                   onClick={(e) => {
                     e.stopPropagation();
@@ -257,12 +259,16 @@ export function ProductGrid({ selectedCategory }: ProductGridProps) {
                   }}
                   size="sm"
                 >
+                  <span className="mr-2 inline-flex items-center">
+                    <ShoppingCart className="h-5 w-5" />
+                  </span>
                   Buy Now
                 </Button>
+                {/* Rent button */}
                 {product.isRentable ? (
                   <Button
                     variant="outline"
-                    className="w-full bg-white/90 hover:bg-white border-gray-900 text-gray-900 text-xs sm:text-sm px-3 py-2 sm:px-4 sm:py-2"
+                    className="w-full bg-white hover:bg-blue-50 border-2 border-blue-500 text-blue-700 font-semibold text-xs sm:text-sm px-4 py-3 sm:px-5 sm:py-3 rounded-xl shadow btn-animate transition-all duration-200 hover:border-blue-700 active:scale-95"
                     onClick={(e) => {
                       e.stopPropagation();
                       toast({
@@ -272,14 +278,14 @@ export function ProductGrid({ selectedCategory }: ProductGridProps) {
                     }}
                     size="sm"
                   >
-                    <Calendar className="mr-2 h-4 w-4" />
+                    <Calendar className="mr-2 h-5 w-5" />
                     Rent (${product.rentalPrice}/day)
                   </Button>
                 ) : (
                   <Button
                     variant="outline"
                     disabled
-                    className="w-full bg-gray-100 text-gray-400 border-gray-300 text-xs sm:text-sm px-3 py-2 sm:px-4 sm:py-2"
+                    className="w-full bg-gray-100 text-gray-400 border-gray-300 text-xs sm:text-sm px-4 py-3 sm:px-5 sm:py-3 rounded-xl"
                     size="sm"
                   >
                     Not for Rent
