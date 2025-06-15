@@ -9,6 +9,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarFooter,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import { Package, Heart, Star, MessageCircle, User } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -25,6 +26,7 @@ const items = [
 export function CustomerSidebar() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { isMobile } = useSidebar();
 
   return (
     <Sidebar className="z-40 min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-700 w-[75px] sm:w-56 shadow-xl ">
@@ -50,7 +52,16 @@ export function CustomerSidebar() {
                   >
                     <div className="inline-flex items-center w-full">
                       <item.icon size={22} className="mr-0 sm:mr-2" />
-                      <span className="hidden sm:inline">{item.label}</span>
+                      <span
+                        className={
+                          // Agar mobile hai to always show, warna sirf sm aur above pe visible
+                          isMobile
+                            ? "inline"
+                            : "hidden sm:inline"
+                        }
+                      >
+                        {item.label}
+                      </span>
                     </div>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
