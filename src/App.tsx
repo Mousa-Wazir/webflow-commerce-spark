@@ -10,6 +10,7 @@ import SignUp from './pages/SignUp';
 import CustomerDashboard from './pages/CustomerDashboard';
 import NotFound from './pages/NotFound';
 import Orders from './pages/Orders';
+import Reviews from './pages/Reviews';
 import { CartWishlistProvider } from "@/store/CartWishlistContext";
 import Cart from './pages/Cart';
 import Wishlist from './pages/Wishlist';
@@ -30,6 +31,7 @@ function App() {
           <Route path="/orders" element={<Orders />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/reviews" element={<Reviews />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Toaster />
