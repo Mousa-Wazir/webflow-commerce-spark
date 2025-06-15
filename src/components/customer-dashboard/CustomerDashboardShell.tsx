@@ -9,7 +9,8 @@ export function CustomerDashboardShell({
 }: { children: React.ReactNode }) {
   return (
     <SidebarProvider>
-      <div className="min-h-screen flex w-full bg-gradient-to-br from-gray-100 via-white to-gray-200 dark:from-gray-950 dark:via-gray-900 dark:to-gray-900 transition-colors">
+      {/* Use a subtle white & grey background gradient */}
+      <div className="min-h-screen flex w-full bg-gradient-to-br from-white via-gray-100 to-gray-200 dark:from-gray-950 dark:via-gray-900 dark:to-gray-900 transition-colors">
         {/* Sidebar (sticky, collapsible) */}
         <CustomerSidebar />
         {/* Main content area */}
@@ -34,3 +35,4 @@ export function CustomerDashboardShell({
     </SidebarProvider>
   );
 }
+
