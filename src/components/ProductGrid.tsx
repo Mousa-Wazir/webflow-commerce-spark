@@ -222,16 +222,15 @@ export function ProductGrid({ selectedCategory }: ProductGridProps) {
                   <span className="text-xs md:text-sm text-blue-600">• ${product.rentalPrice}/day rent</span>
                 )}
               </div>
-              {/* Responsive Card Buttons */}
+              {/* Responsive Card Buttons (Professional Gray/White/Black) */}
               <div className="flex flex-col gap-2 mt-4 w-full sm:flex-row sm:gap-3 xl:gap-4">
-                {/* Add to Cart button */}
+                {/* Add to Cart */}
                 <Button
                   className="w-full font-semibold text-xs sm:text-sm px-4 py-3 sm:px-5 sm:py-3 rounded-xl
                   transition-all duration-200 
-                  bg-primary text-primary-foreground shadow-lg border-2 border-transparent
-                  hover:bg-primary/90 hover:border-primary active:scale-95
-                  focus:outline-none focus:ring-2 focus:ring-primary/30
-                  "
+                  bg-gray-900 text-white shadow-lg border-2 border-gray-800
+                  hover:bg-black hover:border-black active:scale-95
+                  focus:outline-none focus:ring-2 focus:ring-gray-300"
                   onClick={(e) => {
                     e.stopPropagation();
                     if (!isInCart(product.id)) {
@@ -253,14 +252,13 @@ export function ProductGrid({ selectedCategory }: ProductGridProps) {
                   <ShoppingCart className="mr-2 h-5 w-5" />
                   {isInCart(product.id) ? "In Cart" : "Add to Cart"}
                 </Button>
-                {/* Buy Now button */}
+                {/* Buy Now */}
                 <Button
-                  className="w-full font-semibold text-xs sm:text-sm px-4 py-3 sm:px-5 sm:py-3 rounded-xl
-                  transition-all duration-200 
-                  bg-yellow-400 text-black shadow-lg border-2 border-transparent
-                  hover:bg-yellow-500 hover:border-yellow-600 active:scale-95
-                  focus:outline-none focus:ring-2 focus:ring-yellow-200
-                  "
+                  className="w-full font-semibold text-xs sm:text-sm px-4 py-3 sm:px-5 sm:py-3 rounded-xl 
+                  transition-all duration-200
+                  bg-white text-gray-900 border-2 border-gray-900 shadow-lg
+                  hover:bg-gray-100 hover:border-black active:scale-95
+                  focus:outline-none focus:ring-2 focus:ring-gray-200"
                   variant="default"
                   onClick={(e) => {
                     e.stopPropagation();
@@ -274,16 +272,15 @@ export function ProductGrid({ selectedCategory }: ProductGridProps) {
                   </span>
                   Buy Now
                 </Button>
-                {/* Rent button */}
+                {/* Rent */}
                 {product.isRentable ? (
                   <Button
                     variant="outline"
                     className="w-full font-semibold text-xs sm:text-sm px-4 py-3 sm:px-5 sm:py-3 rounded-xl
                     transition-all duration-200
-                    bg-blue-500 text-white border-blue-600 shadow
-                    hover:bg-blue-600 hover:border-blue-700 active:scale-95
-                    focus:outline-none focus:ring-2 focus:ring-blue-200
-                    "
+                    bg-gray-100 text-gray-900 border-2 border-gray-400 hover:bg-gray-200 hover:border-gray-700 shadow
+                    active:scale-95
+                    focus:outline-none focus:ring-2 focus:ring-gray-200"
                     onClick={(e) => {
                       e.stopPropagation();
                       toast({
