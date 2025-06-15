@@ -21,12 +21,12 @@ export function ProductButtons({ product }: ProductButtonsProps) {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col gap-2 mt-4 w-full">
-      <div className="flex flex-row gap-3 w-full">
+    <div className="flex flex-col gap-2 sm:gap-3 mt-4 w-full">
+      <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 w-full">
         {/* Add to Cart */}
         <Button
-          className="flex-1 min-w-0 font-bold px-4 py-3 rounded-2xl bg-gray-900 text-white shadow-lg border-none
-              hover:bg-gray-800 active:scale-95 transition-all duration-200 text-base btn-animate
+          className="flex-1 min-w-0 font-bold px-4 py-2 sm:py-3 rounded-xl sm:rounded-2xl bg-gray-900 text-white shadow-lg border-none
+              hover:bg-gray-800 active:scale-95 transition-all duration-200 text-sm sm:text-base btn-animate
               tracking-wide drop-shadow-md ring-2 ring-transparent hover:ring-gray-600"
           onClick={(e) => {
             e.stopPropagation();
@@ -52,8 +52,8 @@ export function ProductButtons({ product }: ProductButtonsProps) {
 
         {/* Buy Now */}
         <Button
-          className="flex-1 min-w-0 font-bold px-4 py-3 rounded-2xl bg-white text-gray-900 border-2 border-gray-900
-              shadow-lg hover:bg-gray-100 active:scale-95 transition-all duration-200 text-base btn-animate
+          className="flex-1 min-w-0 font-bold px-4 py-2 sm:py-3 rounded-xl sm:rounded-2xl bg-white text-gray-900 border-2 border-gray-900
+              shadow-lg hover:bg-gray-100 active:scale-95 transition-all duration-200 text-sm sm:text-base btn-animate
               tracking-wide drop-shadow-md ring-2 ring-transparent hover:ring-gray-800"
           variant="default"
           onClick={(e) => {
@@ -72,7 +72,7 @@ export function ProductButtons({ product }: ProductButtonsProps) {
         {product.isRentable ? (
           <Button
             variant="outline"
-            className="w-full font-semibold text-base px-4 py-2 rounded-xl
+            className="w-full font-semibold text-sm sm:text-base px-4 py-2 sm:py-3 rounded-lg sm:rounded-xl
                 transition-all duration-200 bg-gray-100 text-gray-900 border-2 border-gray-400
                 hover:bg-gray-200 hover:border-gray-700 shadow btn-animate active:scale-95"
             onClick={(e) => {
@@ -91,7 +91,7 @@ export function ProductButtons({ product }: ProductButtonsProps) {
           <Button
             variant="outline"
             disabled
-            className="w-full bg-gray-100 text-gray-400 border-gray-300 text-base px-4 py-2 rounded-xl"
+            className="w-full bg-gray-100 text-gray-400 border-gray-300 text-sm sm:text-base px-4 py-2 sm:py-3 rounded-lg sm:rounded-xl"
             size="sm"
           >
             Not for Rent
@@ -101,3 +101,4 @@ export function ProductButtons({ product }: ProductButtonsProps) {
     </div>
   );
 }
+
