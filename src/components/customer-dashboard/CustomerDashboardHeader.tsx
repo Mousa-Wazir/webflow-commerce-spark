@@ -68,17 +68,18 @@ export function CustomerDashboardHeader() {
 
         {/* Icons */}
         <div className="flex items-center gap-2 relative">
-          {/* Cart */}
+          {/* Cart - Attractive style */}
           <Button
             variant="ghost"
             size="icon"
-            className="text-gray-700 hover:bg-gray-200 relative"
+            className="relative bg-green-500 hover:bg-green-600 active:bg-green-700 shadow-lg hover:scale-110 active:scale-95 transition-all duration-200 border-2 border-white flex items-center justify-center"
             onClick={() => navigate("/cart")}
             aria-label="Cart"
+            style={{ minWidth: 44, minHeight: 44 }}
           >
-            <Search className="h-5 w-5" />
+            <Search className="h-5 w-5 text-white drop-shadow-lg" />
             {cart.length > 0 && (
-              <span className="absolute -top-1 -right-1 bg-green-500 text-white text-xs font-bold px-2 py-0.5 rounded-full border border-white">
+              <span className="absolute -top-1 -right-1 bg-green-600 text-white text-xs font-bold px-2 py-0.5 rounded-full border border-white shadow">
                 {cart.length}
               </span>
             )}
