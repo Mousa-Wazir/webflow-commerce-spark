@@ -2,31 +2,84 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { cva } from "class-variance-authority";
-// Only allowed Lucide icons
 import {
-  Login,
+  LogIn,
   LogOut,
-  "sign-up" as SignUp,
-  "add-to-cart" as AddToCart,
-  "browse-products" as BrowseProducts,
-  "leave-a-review" as LeaveAReview,
-  "chat-with-seller" as ChatWithSeller,
-  "manage-profile" as ManageProfile,
-  "back-to-homepage" as BackToHomepage,
+  UserPlus,
+  ShoppingCart,
+  Search,
+  PencilLine,
+  MessageCircle,
+  Settings,
+  Home,
 } from "lucide-react";
 
-// Map allowed icons to Lucide components
+// Set up a map of expected icon names to Lucide React components
 const ICON_MAP: { [key: string]: React.ElementType } = {
-  login: Login,
-  "sign-up": LogOut, // Used as a placeholder, replace with correct icon if available
-  "add-to-cart": AddToCart,
-  "browse-products": BrowseProducts,
-  "leave-a-review": LeaveAReview,
-  "chat-with-seller": ChatWithSeller,
-  "manage-profile": ManageProfile,
-  "back-to-homepage": BackToHomepage,
+  login: LogIn,
+  "sign-up": UserPlus,
+  "add-to-cart": ShoppingCart,
+  "browse-products": Search,
+  "leave-a-review": PencilLine,
+  "chat-with-seller": MessageCircle,
+  "manage-profile": Settings,
+  "back-to-homepage": Home,
   logout: LogOut,
 };
+
+// Highly professional, visually attractive, modern button style variants
+const buttonVariants = cva(
+  [
+    "relative group flex items-center justify-center",
+    "font-bold tracking-wide outline-none border-0 select-none whitespace-nowrap",
+    "rounded-2xl min-h-[44px] px-6 py-3",
+    "text-base md:text-lg",
+    "transition-all duration-250 ease-in-out will-change-transform will-change-shadow",
+    "shadow-lg focus-visible:ring-2 focus-visible:ring-gray-800 focus-visible:ring-offset-2",
+    "focus-visible:outline-none",
+    "overflow-hidden",
+  ].join(" "),
+  {
+    variants: {
+      variant: {
+        primary: [
+          "bg-gradient-to-br from-[#2e2e2e] to-[#000]",
+          "text-white",
+          "hover:from-black hover:to-[#2e2e2e]",
+          "shadow-xl",
+        ].join(" "),
+        secondary: [
+          "bg-gradient-to-br from-gray-100 to-white text-gray-900",
+          "hover:bg-gray-200 shadow-lg",
+        ].join(" "),
+        outline: [
+          "bg-white border-2 border-[#2e2e2e] text-gray-900 hover:bg-gray-100 shadow",
+        ].join(" "),
+        danger: [
+          "bg-gradient-to-br from-red-700 to-black text-white hover:from-red-800 shadow-xl",
+        ].join(" "),
+      },
+      fullWidth: {
+        true: "w-full",
+        false: "w-auto",
+      },
+      ctaPulse: {
+        true: "animate-pulse",
+        false: "",
+      },
+      disabled: {
+        true: "opacity-60 pointer-events-none",
+        false: "",
+      },
+    },
+    defaultVariants: {
+      variant: "primary",
+      fullWidth: false,
+      ctaPulse: false,
+      disabled: false
+    }
+  }
+);
 
 type DashboardButtonProps = {
   children: React.ReactNode;
@@ -39,34 +92,8 @@ type DashboardButtonProps = {
   className?: string;
   type?: "button" | "submit" | "reset";
   fullWidth?: boolean;
+  style?: React.CSSProperties;
 };
-
-// Main style variants for colors, gradient, shadow (uses theme palette as requested)
-const buttonVariants = cva(
-  "relative group flex items-center justify-center font-bold tracking-wide transition-all duration-250 ease-in-out outline-none border-0 text-base sm:text-lg select-none whitespace-nowrap",
-  {
-    variants: {
-      variant: {
-        primary:
-          "bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white hover:from-black/90 hover:to-gray-800 shadow-xl",
-        secondary:
-          "bg-gradient-to-br from-gray-100 to-white text-gray-900 hover:bg-gray-200 shadow-lg",
-        outline:
-          "bg-white text-gray-900 border-2 border-gray-900 hover:bg-gray-100 shadow",
-        danger:
-          "bg-gradient-to-br from-red-700 to-black text-white hover:from-red-800 shadow-xl",
-      },
-      fullWidth: {
-        true: "w-full",
-        false: "w-auto",
-      },
-    },
-    defaultVariants: {
-      variant: "primary",
-      fullWidth: false,
-    },
-  }
-);
 
 export const DashboardButton = React.forwardRef<HTMLButtonElement, DashboardButtonProps>(
   (
@@ -75,12 +102,13 @@ export const DashboardButton = React.forwardRef<HTMLButtonElement, DashboardButt
       icon,
       "aria-label": ariaLabel,
       onClick,
-      disabled,
+      disabled = false,
       variant = "primary",
       ctaPulse = false,
-      className,
+      className = "",
       type = "button",
       fullWidth = false,
+      style = {},
       ...rest
     },
     ref
@@ -96,65 +124,54 @@ export const DashboardButton = React.forwardRef<HTMLButtonElement, DashboardButt
         tabIndex={disabled ? -1 : 0}
         onClick={onClick}
         disabled={disabled}
+        style={{
+          animation:
+            "fade-in 0.33s cubic-bezier(.4,0,.2,1), slide-in-up 0.32s cubic-bezier(.4,0,.2,1)",
+          ...style,
+        }}
         className={cn(
-          buttonVariants({ variant, fullWidth }),
-          // Shape, padding, minimum touch area
-          "rounded-2xl min-h-[44px] px-6 py-3 sm:py-3 sm:px-8",
-          // Strong shadow and elevation, outline for focus  
-          "shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2",
-          // Pulse for CTAs (e.g. Add to Cart)
-          ctaPulse ? "animate-pulse" : "",
-          // Disabled
-          disabled && "opacity-60 pointer-events-none",
-          // Smooth transitions, smooth scale
-          "transition-all duration-250 ease-in-out will-change-transform will-change-shadow",
-          // Responsive font and size
-          "text-base md:text-lg",
-          // Layout for full-width on mobile
-          "w-full sm:w-auto",
+          buttonVariants({
+            variant,
+            fullWidth,
+            ctaPulse,
+            disabled,
+          }),
+          // Extra: larger touch area, grid & margin for all layouts
+          "my-2 sm:my-0 mx-0 sm:mx-2",
           className
         )}
         {...rest}
-        /* Animate on mount: fade-in and slide up */
-        style={{
-          animation: "fade-in 0.33s cubic-bezier(.4,0,.2,1), slide-in-right 0.28s cubic-bezier(.4,0,.2,1)",
-          ...(rest.style || {})
-        }}
       >
-        {/* Icon (slide right on hover, pulsing if CTA) */}
+        {/* Icon (slides right on hover, glows on hover, pulse for CTA) */}
         {IconComp && (
           <span
-            className={
-              cn(
-                "inline-flex mr-2 transition-all duration-250 group-hover:translate-x-1 group-active:scale-100",
-                ctaPulse ? "animate-pulse" : ""
-              )
-            }
+            className={cn(
+              "inline-flex mr-2 transition-all duration-250 group-hover:translate-x-1",
+              ctaPulse ? "animate-pulse" : ""
+            )}
             aria-hidden="true"
           >
             <IconComp size={22} />
           </span>
         )}
-        {/* Glow text and animate in */}
+        {/* Glow and animated text */}
         <span
-          className={
-            cn(
-              "transition-all duration-250 group-hover:text-white group-hover:drop-shadow-glow",
-              "group-active:text-gray-200"
-            )
-          }
+          className={cn(
+            "transition-all duration-250 group-hover:text-white group-hover:drop-shadow-glow group-active:text-gray-200"
+          )}
         >
           {children}
         </span>
-        {/* Ripple on press, fade effect */}
+        {/* Ripple effect on press */}
         <span
-          className="absolute inset-0 z-0 pointer-events-none opacity-0 group-active:opacity-100 rounded-2xl"
+          className={cn(
+            "absolute inset-0 z-0 pointer-events-none opacity-0 group-active:opacity-100 rounded-2xl"
+          )}
           style={{
             boxShadow: "0 0 0 2px #fff2, 0 4px 32px 0 #0004 inset",
-            transition: "opacity 120ms linear"
+            transition: "opacity 120ms linear",
           }}
         />
-        {/* Focus border highlight */}
       </button>
     );
   }
@@ -163,7 +180,7 @@ export const DashboardButton = React.forwardRef<HTMLButtonElement, DashboardButt
 DashboardButton.displayName = "DashboardButton";
 
 /**
- * Example usage:
+ * Examples:
  * <DashboardButton icon="login" aria-label="Login" onClick={...}>Login</DashboardButton>
  * <DashboardButton variant="primary" icon="add-to-cart" ctaPulse>Add to Cart</DashboardButton>
  * <DashboardButton variant="outline" icon="browse-products">Browse Products</DashboardButton>
