@@ -14,7 +14,7 @@ import {
   Home,
 } from "lucide-react";
 
-// Set up a map of expected icon names to Lucide React components
+// Icon mapping
 const ICON_MAP: { [key: string]: React.ElementType } = {
   login: LogIn,
   "sign-up": UserPlus,
@@ -27,37 +27,52 @@ const ICON_MAP: { [key: string]: React.ElementType } = {
   logout: LogOut,
 };
 
-// Highly professional, visually attractive, modern button style variants
+// Enhanced: Responsive & highly professional button style variants
 const buttonVariants = cva(
   [
     "relative group flex items-center justify-center",
     "font-bold tracking-wide outline-none border-0 select-none whitespace-nowrap",
-    "rounded-2xl min-h-[44px] px-6 py-3",
-    "text-base md:text-lg",
+    // Responsive: full on mobile, adaptive on tablet/desktop
+    "w-full min-h-[48px] px-4 py-3",
+    "sm:w-auto sm:min-w-[160px] sm:px-8 sm:py-3",
+    "md:min-w-[188px] md:px-10 md:py-3",
+    "lg:min-w-[222px] lg:px-12",
+    "rounded-2xl",
+    // Typography responsiveness
+    "text-[1rem] sm:text-[1.07rem] md:text-lg lg:text-xl",
+    // Shadow & transition
     "transition-all duration-250 ease-in-out will-change-transform will-change-shadow",
-    "shadow-lg focus-visible:ring-2 focus-visible:ring-gray-800 focus-visible:ring-offset-2",
+    // Shadow effect
+    "shadow-md hover:shadow-xl focus-visible:shadow-2xl",
+    "focus-visible:ring-2 focus-visible:ring-gray-800 focus-visible:ring-offset-2",
     "focus-visible:outline-none",
     "overflow-hidden",
+    // Alignment margin
+    "my-2 sm:my-0 mx-0 sm:mx-2",
   ].join(" "),
   {
     variants: {
       variant: {
-        primary: [
-          "bg-gradient-to-br from-[#2e2e2e] to-[#000]",
-          "text-white",
-          "hover:from-black hover:to-[#2e2e2e]",
-          "shadow-xl",
-        ].join(" "),
-        secondary: [
-          "bg-gradient-to-br from-gray-100 to-white text-gray-900",
-          "hover:bg-gray-200 shadow-lg",
-        ].join(" "),
-        outline: [
-          "bg-white border-2 border-[#2e2e2e] text-gray-900 hover:bg-gray-100 shadow",
-        ].join(" "),
-        danger: [
-          "bg-gradient-to-br from-red-700 to-black text-white hover:from-red-800 shadow-xl",
-        ].join(" "),
+        primary:
+          [
+            "bg-gradient-to-br from-[#2e2e2e] to-[#000]",
+            "text-white",
+            "hover:from-black hover:to-[#2e2e2e]",
+            "shadow-xl"
+          ].join(" "),
+        secondary:
+          [
+            "bg-gradient-to-br from-gray-100 to-white text-gray-900",
+            "hover:bg-gray-200 shadow-lg"
+          ].join(" "),
+        outline:
+          [
+            "bg-white border-2 border-[#2e2e2e] text-gray-900 hover:bg-gray-100 shadow"
+          ].join(" "),
+        danger:
+          [
+            "bg-gradient-to-br from-red-700 to-black text-white hover:from-red-800 shadow-xl"
+          ].join(" "),
       },
       fullWidth: {
         true: "w-full",
@@ -76,8 +91,8 @@ const buttonVariants = cva(
       variant: "primary",
       fullWidth: false,
       ctaPulse: false,
-      disabled: false
-    }
+      disabled: false,
+    },
   }
 );
 
@@ -136,17 +151,19 @@ export const DashboardButton = React.forwardRef<HTMLButtonElement, DashboardButt
             ctaPulse,
             disabled,
           }),
-          // Extra: larger touch area, grid & margin for all layouts
-          "my-2 sm:my-0 mx-0 sm:mx-2",
+          // Responsive vertical margin spacing for mobile/tablet/desktop
+          "my-2 sm:my-2 md:my-2 lg:my-0",
+          // Responsive grid/inline layout support (handled by parent grid)
           className
         )}
         {...rest}
       >
-        {/* Icon (slides right on hover, glows on hover, pulse for CTA) */}
+        {/* Icon (slides right on hover, responsive spacing) */}
         {IconComp && (
           <span
             className={cn(
-              "inline-flex mr-2 transition-all duration-250 group-hover:translate-x-1",
+              "inline-flex transition-all duration-250 group-hover:translate-x-1 group-hover:drop-shadow-lg",
+              "mr-2 text-[1.15em] sm:mr-3 md:mr-4",
               ctaPulse ? "animate-pulse" : ""
             )}
             aria-hidden="true"
@@ -154,22 +171,24 @@ export const DashboardButton = React.forwardRef<HTMLButtonElement, DashboardButt
             <IconComp size={22} />
           </span>
         )}
-        {/* Glow and animated text */}
+        {/* Glowing animated text with responsive font size */}
         <span
           className={cn(
-            "transition-all duration-250 group-hover:text-white group-hover:drop-shadow-glow group-active:text-gray-200"
+            "transition-all duration-250 group-hover:text-white group-hover:drop-shadow-[0_0_6px_#fff8,0_2px_6px_#0005] group-active:text-gray-200",
+            "font-bold tracking-tight sm:tracking-wide"
           )}
         >
           {children}
         </span>
-        {/* Ripple effect on press */}
+        {/* Ripple effect on press (visible on active) */}
         <span
           className={cn(
-            "absolute inset-0 z-0 pointer-events-none opacity-0 group-active:opacity-100 rounded-2xl"
+            "absolute inset-0 z-0 pointer-events-none opacity-0 group-active:opacity-100 rounded-2xl",
+            "transition-opacity duration-150"
           )}
           style={{
-            boxShadow: "0 0 0 2px #fff2, 0 4px 32px 0 #0004 inset",
-            transition: "opacity 120ms linear",
+            boxShadow:
+              "0 0 0 2px #fff2, 0 4px 32px 0 #0004 inset, 0 1px 16px 0 #1117",
           }}
         />
       </button>
