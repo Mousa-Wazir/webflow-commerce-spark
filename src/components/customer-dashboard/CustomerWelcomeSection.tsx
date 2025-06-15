@@ -19,7 +19,7 @@ export function CustomerWelcomeSection({
       />
       <div className="flex flex-col min-w-0">
         <span className="text-lg sm:text-2xl font-bold text-white drop-shadow">Welcome back, {userName} 👋</span>
-        <span className="text-sm sm:text-base text-gray-300 mt-1 truncate">{summary}</span>
+        <span className="text-sm sm:text-base text-indigo-100 mt-1 truncate">{summary}</span>
       </div>
     </section>
   );

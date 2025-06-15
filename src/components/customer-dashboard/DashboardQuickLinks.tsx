@@ -59,13 +59,13 @@ export function DashboardQuickLinks() {
           onClick={() => navigate(path)}
         >
           <div className="relative">
-            <Icon className="w-7 h-7 text-gray-800 drop-shadow" />
+            <Icon className="w-7 h-7 text-black drop-shadow" />
             <span className="absolute -top-3 -right-4 min-w-6 h-6 px-2
               bg-gradient-to-tr from-gray-900 via-gray-800 to-gray-700 text-white text-xs font-bold flex items-center justify-center rounded-full shadow-md border border-white">
               {count}
             </span>
           </div>
-          <span className="mt-2 text-base font-medium text-gray-800">{label}</span>
+          <span className="mt-2 text-base font-medium text-black">{label}</span>
         </button>
       ))}
     </div>
