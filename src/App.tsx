@@ -14,6 +14,7 @@ import Reviews from './pages/Reviews';
 import { CartWishlistProvider } from "@/store/CartWishlistContext";
 import Cart from './pages/Cart';
 import Wishlist from './pages/Wishlist';
+import Chat from './pages/Chat';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/reviews" element={<Reviews />} />
+          <Route path="/chat" element={<Chat />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Toaster />
