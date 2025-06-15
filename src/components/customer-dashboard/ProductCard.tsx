@@ -6,7 +6,6 @@ import { useState } from "react";
 export function ProductCard({ product }: { product: ProductData }) {
   const [added, setAdded] = useState(false);
 
-  // Animation: fade-in on mount
   return (
     <div
       className="bg-white border border-gray-200 rounded-2xl shadow-lg flex flex-col overflow-hidden animate-fade-in"
@@ -38,16 +37,26 @@ export function ProductCard({ product }: { product: ProductData }) {
         <button
           disabled={added}
           onClick={() => setAdded(true)}
-          className={`mt-2 w-full py-2 rounded-xl font-bold transition-all duration-200
+          className={`mt-2 w-full flex items-center justify-center gap-2 py-2 rounded-xl font-bold transition-all duration-200
             ${added
               ? "bg-gray-300 text-gray-500"
-              : "bg-gray-900 text-white hover:bg-black active:scale-95"}
-            shadow-md`}
+              : "bg-green-500 hover:bg-green-600 active:bg-green-700 text-white hover:scale-105 active:scale-95 shadow-lg border-2 border-white"}
+            `}
           tabIndex={0}
           aria-label={added ? 'Already in cart' : 'Add to cart'}
+          style={{ minHeight: 48 }}
         >
-          <span className="flex items-center justify-center gap-2">
-            <ShoppingCart size={20} />
+          <span className="flex items-center gap-2">
+            <span className={`flex items-center justify-center ${added ? "" : "drop-shadow-lg"}`}>
+              <ShoppingCart
+                size={22}
+                className={`${
+                  added
+                    ? "text-gray-400"
+                    : "text-white"
+                }`}
+              />
+            </span>
             {added ? "Added" : "Add to Cart"}
           </span>
         </button>
@@ -55,3 +64,4 @@ export function ProductCard({ product }: { product: ProductData }) {
     </div>
   )
 }
+
