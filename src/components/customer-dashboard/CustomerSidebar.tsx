@@ -1,5 +1,5 @@
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupLabel, SidebarGroupContent, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarFooter, useSidebar } from "@/components/ui/sidebar";
-import { Package, Heart, Star, MessageCircle, User } from "lucide-react";
+import { Package, Heart, Star, MessageCircle, User, Settings } from "lucide-react";
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -28,6 +28,10 @@ const items = [{
   label: "Profile",
   icon: User,
   href: "/profile"
+}, {
+  label: "Settings",
+  icon: Settings,
+  href: "/profile/settings"
 }];
 export function CustomerSidebar() {
   const navigate = useNavigate();
