@@ -135,7 +135,7 @@ export function ProductGrid({ selectedCategory }: ProductGridProps) {
       </div>
 
       {/* Product Grid */}
-      <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+      <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 md:gap-6">
         {filteredProducts.map((product) => (
           <Card
             key={product.id}
@@ -222,11 +222,12 @@ export function ProductGrid({ selectedCategory }: ProductGridProps) {
                   <span className="text-xs md:text-sm text-blue-600">• ${product.rentalPrice}/day rent</span>
                 )}
               </div>
-              {/* Responsive Card Buttons (Professional Gray/White/Black) */}
-              <div className="flex flex-col gap-2 mt-4 w-full sm:flex-row sm:gap-3 xl:gap-4">
+              {/* Card Buttons Row */}
+              {/* Stacks on mobile, row on md+ — buttons always inside the card, never overflow */}
+              <div className="flex flex-col md:flex-row gap-2 md:gap-3 mt-4 w-full">
                 {/* Add to Cart */}
                 <Button
-                  className="w-full font-semibold text-xs sm:text-sm px-4 py-3 sm:px-5 sm:py-3 rounded-xl
+                  className="flex-1 font-semibold text-xs sm:text-sm px-4 py-3 rounded-xl
                   transition-all duration-200 
                   bg-gray-900 text-white shadow-lg border-2 border-gray-800
                   hover:bg-black hover:border-black active:scale-95
@@ -252,9 +253,10 @@ export function ProductGrid({ selectedCategory }: ProductGridProps) {
                   <ShoppingCart className="mr-2 h-5 w-5" />
                   {isInCart(product.id) ? "In Cart" : "Add to Cart"}
                 </Button>
+
                 {/* Buy Now */}
                 <Button
-                  className="w-full font-semibold text-xs sm:text-sm px-4 py-3 sm:px-5 sm:py-3 rounded-xl 
+                  className="flex-1 font-semibold text-xs sm:text-sm px-4 py-3 rounded-xl 
                   transition-all duration-200
                   bg-white text-gray-900 border-2 border-gray-900 shadow-lg
                   hover:bg-gray-100 hover:border-black active:scale-95
@@ -272,11 +274,12 @@ export function ProductGrid({ selectedCategory }: ProductGridProps) {
                   </span>
                   Buy Now
                 </Button>
+
                 {/* Rent */}
                 {product.isRentable ? (
                   <Button
                     variant="outline"
-                    className="w-full font-semibold text-xs sm:text-sm px-4 py-3 sm:px-5 sm:py-3 rounded-xl
+                    className="flex-1 font-semibold text-xs sm:text-sm px-4 py-3 rounded-xl
                     transition-all duration-200
                     bg-gray-100 text-gray-900 border-2 border-gray-400 hover:bg-gray-200 hover:border-gray-700 shadow
                     active:scale-95
@@ -297,7 +300,7 @@ export function ProductGrid({ selectedCategory }: ProductGridProps) {
                   <Button
                     variant="outline"
                     disabled
-                    className="w-full bg-gray-100 text-gray-400 border-gray-300 text-xs sm:text-sm px-4 py-3 sm:px-5 sm:py-3 rounded-xl"
+                    className="flex-1 bg-gray-100 text-gray-400 border-gray-300 text-xs sm:text-sm px-4 py-3 rounded-xl"
                     size="sm"
                   >
                     Not for Rent
